@@ -1,0 +1,102 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+
+<meta charset="UTF-8">
+<head>
+<title>用户数据导入</title>
+</head>
+
+
+<style type="text/css">
+body {
+	overflow: auto;
+	padding: 0px;
+	margin: 0px;
+	color: #110000;
+	font: normal 18px Tahoma;
+	background: #e9e9e9;
+	-background-image: -moz-linear-gradient(top, #57a740, #468733);
+	-background-image: -webkit-gradient(linear, right top, left bottom, color-stop(0, #113366),
+		color-stop(1, #000000));
+	-background-image: linear-gradient(to bottom, #113366 0%, #000000 100%);
+}
+</style>
+
+
+<script src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+	function getData(url, fn) {
+		$.ajax({
+			url : url,
+			method : 'get',
+			async : true,
+			dataType : 'jsonp',
+			jsonp : 'jsonpFunc',
+			jsonpCallback : 'fn',
+			success : function(res) {
+				if (fn)
+					fn(res);
+			},
+			error : function(e) {
+				console.log("request erro");
+			}
+		});
+	}
+
+	var url = "/UBAS_BOSS_Services/region/get?__param={%22pid%22:%22%22,%22depth%22:%22%22,%22pageSize%22:%22%22,%22startPage%22:%22%22,%22endPage%22:%22%22,%22state%22:%22%22,%22jsonpFunc%22:%22fn%22,%22keyword%22:%22%22}";
+
+	
+	getData(
+			url,
+			function(res) {
+				var obj = document.getElementById('reg');
+				//一级区域
+				var reg1 = res.data.regions;
+				if (reg1.length > 0) {
+					for (var i = 0; i < reg1.length; i++) {
+						obj.add(new Option(reg1[i].value, reg1[i].guid));
+						var reg2 = reg1[i].child;//二级区域
+						if (reg2) {
+							console.log(reg2);
+							for (var j = 0; j < reg2.length; j++) {
+								obj.add(new Option(reg2[j].value, reg2[j].guid));
+								var reg3 = reg2[j].child;//三级区域
+								if (reg3) {
+									console.log(reg3);
+									for (var k = 0; k < reg3.length; k++) {
+										obj.add(new Option(reg3[k].value, reg3[k].guid));
+										var reg4 = reg3[k].child;//四级区域
+										if (reg4) {
+											console.log(reg4);
+											for (var l = 0; l < reg4.length; l++) {
+												obj.add(new Option(reg4[l].value, reg4[l].guid));
+												var reg4 = reg4[lk].child;//五级区域
+												if (reg5) {
+													console.log(reg5);
+
+												}
+											}
+
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+ 
+			})
+</script>
+<body>
+	<div style="padding-left: 20px; margin-bottom: 50px; margin-top: 20px">
+		<form method="post" action="import/upload"
+			enctype="multipart/form-data">
+			选择用户数据Excel表格: &nbsp; <input type="file" name="file"> 选择区域： <select
+				name="guid" id="reg">
+			</select> &nbsp; &nbsp; <input type="submit" onclick="uploadPic()">
+		</form>
+
+	</div>
+</body>
+</html>

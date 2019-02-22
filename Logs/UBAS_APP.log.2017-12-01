@@ -1,0 +1,53 @@
+我就记录个日志试试
+我就记录个日志试试
+
+2017-12-01 10:49:38
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 我就记录个日志试试
+
+2017-12-01 10:49:56
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 我就记录个日志试试
+我就记录个日志试试
+我就记录个日志试试
+我就记录个日志试试
+
+2017-12-01 10:52:13
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 我就记录个日志试试
+
+2017-12-01 14:04:37
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 当前发送验证码的手机号是15180901799
+
+2017-12-01 14:04:37
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 当前生成的五位数验证码是3212740
+
+2017-12-01 14:04:38
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 15180901799验证码发送成功
+
+2017-12-01 14:06:32
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 当前发送验证码的手机号是15180901799
+
+2017-12-01 14:06:32
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 当前生成的七位数验证码是7510364
+
+2017-12-01 14:06:33
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 15180901799验证码发送成功
+
+2017-12-01 14:06:33
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 15180901799注册APP,发送验证码成功
+
+2017-12-01 14:40:28
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 当前发送验证码的手机号是15180901799
+
+2017-12-01 14:40:28
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 当前生成的七位数验证码是4810000
+
+2017-12-01 14:41:13
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 当前发送验证码的手机号是15180901799
+
+2017-12-01 14:41:13
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 当前生成的七位数验证码是6143212
+
+2017-12-01 14:41:14
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 15180901799验证码发送成功
+
+2017-12-01 14:41:14
+[INFO]-[com.zens.ubasbossservices.log.APPUserModulelog.server()]: 15180901799注册APP,发送验证码成功

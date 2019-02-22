@@ -1,0 +1,192 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+
+<head>
+	<title>UBAS_BOSS_Services-接口测试-Java</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	<meta name="page-view-size" content="1280*720"/>
+	<meta name="author" content="scumyang@gmail.com"/>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<link rel="shortcut icon" href="favicon.ico">
+</head>
+
+<style type="text/css">
+body
+{
+overflow:auto;padding:0px;margin:0px;color:#ccc;font:normal 18px Tahoma;
+background:#000000;
+-background-image:-moz-linear-gradient(top, #57a740, #468733);
+-background-image:-webkit-gradient(linear, right top, left bottom, color-stop(0, #113366), color-stop(1, #000000));
+-background-image:linear-gradient(to bottom, #113366 0%,#000000 100%);
+}
+
+img,button			{border:0px}
+
+a,a:link,a:visited	{text-decoration:none;font:normal 15px Tahoma;color:#fff}
+a:hover				{text-decoration:underline;color:#ff0}
+
+#eSA				{position:absolute;height:648px;left:64px;top:36px}
+
+li
+{
+font:normal 15px Tahoma;
+padding-left:20px;
+margin-bottom:20px;
+}
+
+h2
+{
+color:#f80;
+}
+
+label
+{
+font:normal 15px tahoma;
+}
+
+input
+{
+width:1280px;
+height:40px;
+font:bold 15px Tahoma;
+color:#6af;
+background:#333;
+border:1px solid #555;
+border-radius:8px;
+padding:5px;
+}
+
+.inp_s
+{
+width:1280px;
+}
+
+</style>
+
+<script type="text/javascript" src=""></script>
+<script type="text/javascript">
+$G =
+{
+	onPageLoad: function()
+	{
+		try
+		{
+			window.$ ? 0 : window.$ = function $( E ){ return document.getElementById( E ); }
+
+			document.onkeydown = function( E )
+			{
+				var E = E || event, K = E.keyCode;
+				switch( K )
+				{
+					//case 48: location.reload(); break;
+				}
+			}
+		}
+		catch( E )
+		{
+			alert( '$G.onPageLoad(): ' + E.message );
+		}
+	}
+
+	,onPageUnload: function()
+	{
+	}
+}
+</script>
+
+<body onload="$G.onPageLoad()" onunload="$G.onPageUnload()">
+
+<!--安全区-->
+<div id="eSA">
+<ul>
+	<li><h2>UBAS_BOSS_Services</h2></li>
+	
+	<!-- 注册用户相关接口 -->
+	<li><a href="javascript:open('/UBAS_BOSS_Services/termUser/add?param='+ $('param1').value)" target="_blank">添加注册用户 termUser/add</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param1" value='{"FLevel":"0","FEmail":"sina@169.com","FBossCity":"SHSJ","FMobile":"2937429","FType":"1","FExt":"备用字段","FIntergration":"80","FName":"张三","FBossID":"200000001","FIdCard":"1212122321","FBossArea":"0001","FAddr":"上海市徐汇区漕河泾开发区","FIphone":"1800012012","FAge":"29","FBirthday":"2001.01.01","FSex":"男"}'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/termUser/del?param='+ $('param2').value)" target="_blank">批量删除注册用户（支持批量恢复） termUser/del</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param2" value='{"GUIDs":["6d1aba19-905e-4e3f-b02b-bfbad6bb4548","57c379ba-0f51-4309-83ed-637c7aae7ead"]}'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/termUser/set?param='+ $('param3').value)" target="_blank">批量更新注册用户信息 termUser/set</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param3" value= '[{"FGUID":"37ae03d3-0216-4e0c-ba1a-0ded9ed5befc","FType":"2"},{"FGUID":"28441092-879b-4dbc-bba6-4f65c675d480","FType":"3","FLevel":"2"}]'/>
+			
+	<li><a href="javascript:open('/UBAS_BOSS_Services/termUser/get?param='+ $('param4').value)" target="_blank">分页获取注册用户所有信息 termUser/get</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param4" value= '{"pageSize":"10","page":"1"}'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/termUser/getByRegion?param='+ $('param5').value)" target="_blank">根据区域码获取注册用户所有信息 termUser/getByRegion</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param5" value= '{"pageSize":"1","page":"1","FRegionGUID":"vt62ym78bg45670t"}'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/termUser/setRegions?param='+ $('param6').value)" target="_blank">注册用户设置区域 termUser/setRegions</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param6" value='[{"FSubsGUID":"1000000000001","FRegionGUID":"3000000000001","FIsDefault":"0","FIsCharge":"0"},{"FSubsGUID":"1000000000001","FRegionGUID":"3000000000002","FIsDefault":"0","FIsCharge":"0"}]'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/termUser/setGroup?param='+ $('param7').value)" target="_blank">注册用户设置分组 termUser/setGroup</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param7" value='[{"FSubsGUID":"1000000000001","FGroupGUID":"3000000000001","FIsDefault":"0","FIsCharge":"0"},{"FSubsGUID":"1000000000002","FGroupGUID":"3000000000002","FIsDefault":"0","FIsCharge":"0"}]'/>
+
+	<li><a href="javascript:open('/UBAS_BOSS_Services/termUser/setSubscriberPackages?param='+ $('param8').value+'&action='+ $('param9').value+'&operation=true')" target="_blank">注册用户设置业务包termUser/setSubscriberPackages</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param8" value='[{"subsGUID":"dd117cc6-9321-4251-af11-4170a239ce2f", "subscriberPackageGUID":"f11e94a7-6b40-4454-815a-7bfdcb40e9ea","availabilityTime":"2017/03/09 14:13:14","expiryTime":"2019/04/09 14:13:14"},{"subsGUID":"184e0800-6c75-43ba-91ed-ff1a45026688", "subscriberPackageGUID":"f11e94a7-6b40-4454-815a-7bfdcb40e9ea","availabilityTime":"2017/03/09 15:13:14","expiryTime":"2019/04/09 15:13:14"}]'/>
+	&nbsp;<label for="tagId">param：</label><input id="param9" value='bind'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/termUser/hasSubscriberPackage?param='+ $('param10').value)" target="_blank">查询某终端用户是否已订购指定的业务包 termUser/hasSubscriberPackage</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param10" value='{"subsGUID":"c088a1cf-9b99-425f-8873-f373ab04419b","subscriberPackageGUID":"6870ea7d-2cea-4c1b-842a-ad836089ee19"}'/>
+
+    <li><a href="javascript:open('/UBAS_BOSS_Services/termUser/getRegionsByTermUser?param='+ $('param10_1').value)" target="_blank">查询指定注册用户所属区域 termUser/getRegionsByTermUser</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param10_1" value='{"field":"mac","uniqueKey":"1a-2b-3c-4d-5f-7e"}'/>
+
+	<!-- 区域相关接口 -->
+	<li><a href="javascript:open('/UBAS_BOSS_Services/region/add?__param='+ $('param11').value)" target="_blank">添加一个区域 region/add</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param11" value='{"value":"南京市","envalue":"nanjing","pid":"0","icon":"","moveRestrict":"2","indexUrl":"192.168.0","remark":"江苏省会","extdata":"扩展信息"}'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/region/delete?__param='+ $('param12').value)" target="_blank">批量删除区域及子区域 termUser/delete</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param12" value='{"id":["e2r5t2633g456679","c445042d799b1efa"],"jsonpFunc":""}'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/region/set?__param='+ $('param13').value)" target="_blank">批量更新区域 region/set</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param13" value= '[{"jsonpFunc":""},{"id":"c445042d799b1efa","value":"蓝鲸市","envalue":"nanjing","remark":"对对对""},{"id":"e2r5t2633g456679","value":"大上海","state":"0"}]'/>
+			
+	<li><a href="javascript:open('/UBAS_BOSS_Services/region/move?__param='+ $('param14').value)" target="_blank">移动区域 region/move</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param14" value= '{"id":"c445042d799b1efa","pid":"e2r5t2633g456679","sid":"e2r5t2633g456679","jsonpFunc":""}'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/region/get?__param='+ $('param15').value)" target="_blank">查询区域 region/get</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param15" value= '{"pid":"","depth":"","pageSize":"","startPage":"","endPage":"","state":"0","jsonpFunc":"","keyword":""}'/>
+	
+	
+	<!-- 分组相关接口 -->
+	<li><a href="javascript:open('/UBAS_BOSS_Services/group/add?__param='+ $('param16').value)" target="_blank">添加一个分组 group/add</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param16" value='{"type":"0","value":"付费用户","envalue":"","pid":"0","icon":"","moveRestrict":"2","remark":"","extdata":"","jsonpFunc":""}'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/group/delete?__param='+ $('param17').value)" target="_blank">批量删除分组 group/delete</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param17" value='{"id":["e2r5t2633g456679","c445042d799b1efa"],"jsonpFunc":""}'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/group/set?__param='+ $('param18').value)" target="_blank">批量更新分组 group/set</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param18" value= '[{"jsonpFunc":""},{"id":"d04f6a6fe39ed61d","value":"付费用户111","envalue":"","icon":"","remark":"对对对"},{"id":"c7e5ee0f410b1673","value":"VIP用户222","state":"1"}]'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/group/get?__param='+ $('param19').value)" target="_blank">查询分组 group/get</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param19" value= '{"pageSize":"10","startPage":"1","endPage":"2","state":"0","keyword":""}'/>
+
+	<!-- 业务包相关接口 -->
+	<li><a href="javascript:open('/UBAS_BOSS_Services/subscriberPackage/add?__param='+ $('param20').value)" target="_blank">添加一个业务包 subscriberPackage/add</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param20" value='{"type":"1","name":"松江包月","code":"asdf","price":"20","ext":"备用字段"}'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/subscriberPackage/delete?__param='+ $('param21').value)" target="_blank">批量删除业务包 subscriberPackage/delete</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param21" value='{"GUIDs":["6870ea7d-2cea-4c1b-842a-ad836089ee19","46e14877-3c17-4b7a-8426-45e9292bb25a"]}'/>
+
+	<li><a href="javascript:open('/UBAS_BOSS_Services/subscriberPackage/undelete?__param='+ $('param22').value)" target="_blank">批量删除业务包 subscriberPackage/undelete</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param22" value='{"GUIDs":["6870ea7d-2cea-4c1b-842a-ad836089ee19","46e14877-3c17-4b7a-8426-45e9292bb25a"]}'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/subscriberPackage/set?__param='+ $('param23').value)" target="_blank">批量更新业务包 subscriberPackage/set</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param23" value= '[{"GUID":"6870ea7d-2cea-4c1b-842a-ad836089ee19","price":"30"},{"GUID":"46e14877-3c17-4b7a-8426-45e9292bb25a","freezed":"1"}]'/>
+	
+	<li><a href="javascript:open('/UBAS_BOSS_Services/subscriberPackage/getByTermUser?__param='+ $('param24').value)" target="_blank">根据终端用户查询业务包 subscriberPackage/getByTermUser</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param24" value= '{"subsGUID":"c088a1cf-9b99-425f-8873-f373ab04419b"}'/>
+
+	<li><a href="javascript:open('/UBAS_BOSS_Services/subscriberPackage/get?__param='+ $('param25').value)" target="_blank">分页查询业务包 subscriberPackage/get</a><br>
+	&nbsp;<label for="tagId">param：</label><input id="param25" value= '{"pageSize":"2","page":"1"}'/>
+	
+
+</ul>
+</div>
+
+</body>
+</html>

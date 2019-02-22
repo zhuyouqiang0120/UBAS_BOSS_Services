@@ -1,0 +1,1285 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>UBAS-BOSS-Services接口描述文档.md</title><style type='text/css'>html, body {overflow-x: initial !important;}.CodeMirror { height: auto; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; }
+.CodeMirror-lines { padding: 4px 0px; }
+.CodeMirror pre { }
+.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { background-color: white; }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background-color: rgb(247, 247, 247); white-space: nowrap; }
+.CodeMirror-linenumbers { }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.CodeMirror div.CodeMirror-cursor { border-left: 1px solid black; z-index: 3; }
+.CodeMirror div.CodeMirror-secondarycursor { border-left: 1px solid silver; }
+.CodeMirror.cm-keymap-fat-cursor div.CodeMirror-cursor { width: auto; border: 0px; background: rgb(119, 238, 119); z-index: 1; }
+.CodeMirror div.CodeMirror-cursor.CodeMirror-overwrite { }
+.cm-tab { display: inline-block; }
+.cm-s-typora-default .cm-header, .cm-s-typora-default .cm-property { color: rgb(217, 79, 138); }
+.cm-s-typora-default pre.cm-header1:not(.cm-atom) :not(.cm-overlay) { font-size: 2rem; line-height: 2rem; }
+.cm-s-typora-default pre.cm-header2:not(.cm-atom) :not(.cm-overlay) { font-size: 1.4rem; line-height: 1.4rem; }
+.cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number { color: rgb(149, 132, 134); }
+.cm-s-typora-default .cm-table-row, .cm-s-typora-default .cm-block-start { font-family: monospace; }
+.cm-s-typora-default .cm-comment, .cm-s-typora-default .cm-code { color: rgb(74, 90, 159); font-family: monospace; }
+.cm-s-typora-default .cm-tag { color: rgb(169, 68, 66); }
+.cm-s-typora-default .cm-string { color: rgb(126, 134, 169); }
+.cm-s-typora-default .cm-link { color: rgb(196, 122, 15); text-decoration: underline; }
+.cm-s-typora-default .cm-variable-2, .cm-s-typora-default .cm-variable-1 { color: inherit; }
+.cm-s-typora-default .cm-overlay { font-size: 1rem; font-family: monospace; }
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor { border-left: 3px solid rgb(228, 98, 154); }
+.cm-s-typora-default .CodeMirror-activeline-background { left: -60px; right: -30px; background: rgba(204, 204, 204, 0.2); }
+.cm-s-typora-default .CodeMirror-gutters { border-right: none; background-color: inherit; }
+.cm-s-typora-default .cm-trailing-space-new-line::after, .cm-startspace::after, .cm-starttab .cm-tab::after { content: "•"; position: absolute; left: 0px; opacity: 0; font-family: LetterGothicStd, monospace; }
+.os-windows .cm-startspace::after, .os-windows .cm-starttab .cm-tab::after { left: -0.1em; }
+.cm-starttab .cm-tab::after { content: " "; }
+.cm-startspace, .cm-tab, .cm-starttab, .cm-trailing-space-a, .cm-trailing-space-b, .cm-trailing-space-new-line { font-family: monospace; position: relative; }
+.cm-s-typora-default .cm-trailing-space-new-line::after { content: "↓"; opacity: 0.3; }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: black; }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-property { color: black; }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: blue; }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: bold; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: rgb(255, 0, 0); }
+.cm-invalidchar { color: rgb(255, 0, 0); }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { margin-bottom: -30px; margin-right: -30px; padding-bottom: 30px; padding-right: 30px; height: 100%; outline: none; position: relative; box-sizing: content-box; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow-x: hidden; overflow-y: scroll; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow-y: hidden; overflow-x: scroll; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: transparent; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-widget { }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.CodeMirror-selected { background: rgb(217, 217, 217); }
+.CodeMirror-focused .CodeMirror-selected { background: rgb(215, 212, 240); }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+.CodeMirror span { }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+.CodeMirror-lint-markers { width: 16px; }
+.CodeMirror-lint-tooltip { background-color: infobackground; border: 1px solid black; border-radius: 4px; color: infotext; font-family: monospace; overflow: hidden; padding: 2px 5px; position: fixed; white-space: pre-wrap; z-index: 10000; max-width: 600px; opacity: 0; transition: opacity 0.4s; font-size: 0.8em; }
+.CodeMirror-lint-mark-error, .CodeMirror-lint-mark-warning { background-position: left bottom; background-repeat: repeat-x; }
+.CodeMirror-lint-mark-error { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sJDw4cOCW1/KIAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAHElEQVQI12NggIL/DAz/GdA5/xkY/qPKMDAwAADLZwf5rvm+LQAAAABJRU5ErkJggg=="); }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-marker-warning { background-position: center center; background-repeat: no-repeat; cursor: pointer; display: inline-block; height: 16px; width: 16px; vertical-align: middle; position: relative; }
+.CodeMirror-lint-message-error, .CodeMirror-lint-message-warning { padding-left: 18px; background-position: left top; background-repeat: no-repeat; }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-message-error { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAHlBMVEW7AAC7AACxAAC7AAC7AAAAAAC4AAC5AAD///+7AAAUdclpAAAABnRSTlMXnORSiwCK0ZKSAAAATUlEQVR42mWPOQ7AQAgDuQLx/z8csYRmPRIFIwRGnosRrpamvkKi0FTIiMASR3hhKW+hAN6/tIWhu9PDWiTGNEkTtIOucA5Oyr9ckPgAWm0GPBog6v4AAAAASUVORK5CYII="); }
+.CodeMirror-lint-marker-warning, .CodeMirror-lint-message-warning { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAANlBMVEX/uwDvrwD/uwD/uwD/uwD/uwD/uwD/uwD/uwD6twD/uwAAAADurwD2tQD7uAD+ugAAAAD/uwDhmeTRAAAADHRSTlMJ8mN1EYcbmiixgACm7WbuAAAAVklEQVR42n3PUQqAIBBFUU1LLc3u/jdbOJoW1P08DA9Gba8+YWJ6gNJoNYIBzAA2chBth5kLmG9YUoG0NHAUwFXwO9LuBQL1giCQb8gC9Oro2vp5rncCIY8L8uEx5ZkAAAAASUVORK5CYII="); }
+.CodeMirror-lint-marker-multiple { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAMAAADzjKfhAAAACVBMVEUAAAAAAAC/v7914kyHAAAAAXRSTlMAQObYZgAAACNJREFUeNo1ioEJAAAIwmz/H90iFFSGJgFMe3gaLZ0od+9/AQZ0ADosbYraAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-position: right bottom; width: 100%; height: 100%; }
+
+
+html { font-size: 14px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { background: rgb(181, 214, 252); text-shadow: none; }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; padding-bottom: 70px; white-space: pre-wrap; overflow-x: auto; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+.typora-export #write { margin: 0px auto; }
+#write > p:first-child, #write > ul:first-child, #write > ol:first-child, #write > pre:first-child, #write > blockquote:first-child, #write > div:first-child, #write > table:first-child { margin-top: 30px; }
+#write li > table:first-child { margin-top: -20px; }
+img { max-width: 100%; vertical-align: middle; }
+input, button, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+::before, ::after, * { box-sizing: border-box; }
+#write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write div, #write pre { width: inherit; }
+#write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6 { position: relative; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+p { -webkit-margin-before: 1rem; -webkit-margin-after: 1rem; -webkit-margin-start: 0px; -webkit-margin-end: 0px; }
+.mathjax-block { margin-top: 0px; margin-bottom: 0px; -webkit-margin-before: 0rem; -webkit-margin-after: 0rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: bold; font-style: italic; }
+a { cursor: pointer; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; margin: 4px 0px 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+pre { white-space: pre-wrap; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+.md-fences .CodeMirror.CodeMirror-wrap { top: -1.6em; margin-bottom: -1.6em; }
+.md-fences.mock-cm { white-space: pre-wrap; }
+.show-fences-line-number .md-fences { padding-left: 0px; }
+.show-fences-line-number .md-fences.mock-cm { padding-left: 40px; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; padding-top: 1em; padding-bottom: 1em; }
+.footnotes + .footnotes { margin-top: -1em; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: transparent; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: normal; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li p, li .mathjax-block { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; }
+@media print {
+  html, body { height: 100%; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid-page; orphans: 2; }
+  p { orphans: 4; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0mm; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 2.86rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.mathjax-block { white-space: pre; overflow: hidden; width: 100%; }
+p + .mathjax-block { margin-top: -1.143rem; }
+.mathjax-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: none; box-shadow: none; }
+.task-list { list-style-type: none; }
+.task-list-item { position: relative; padding-left: 1em; }
+.task-list-item input { position: absolute; top: 0px; left: 0px; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc::after, .md-toc-content::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); text-decoration: none; }
+.md-toc-inner:hover { }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: bold; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+.md-tag { opacity: 0.5; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: monospace; }
+code { text-align: left; }
+h1 .md-tag, h2 .md-tag, h3 .md-tag, h4 .md-tag, h5 .md-tag, h6 .md-tag { font-weight: initial; opacity: 0.35; }
+a.md-print-anchor { border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: none !important; background: transparent !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.mathjax-block .MathJax_SVG_Display { text-align: center; margin: 1em 0em; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: monospace; }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: normal; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: normal; src: local("Open Sans Regular"), url("./github/400.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: normal; src: local("Open Sans Italic"), url("./github/400i.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: bold; src: local("Open Sans Bold"), url("./github/700.woff") format("woff"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: bold; src: local("Open Sans Bold Italic"), url("./github/700i.woff") format("woff"); }
+html { font-size: 16px; }
+body { font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color: rgb(51, 51, 51); line-height: 1.6; }
+#write { max-width: 860px; margin: 0px auto; padding: 20px 30px 100px; }
+#write > ul:first-child, #write > ol:first-child { margin-top: 30px; }
+body > :first-child { margin-top: 0px !important; }
+body > :last-child { margin-bottom: 0px !important; }
+a { color: rgb(65, 131, 196); }
+h1, h2, h3, h4, h5, h6 { position: relative; margin-top: 1rem; margin-bottom: 1rem; font-weight: bold; line-height: 1.4; cursor: text; }
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor { text-decoration: none; }
+h1 tt, h1 code { font-size: inherit; }
+h2 tt, h2 code { font-size: inherit; }
+h3 tt, h3 code { font-size: inherit; }
+h4 tt, h4 code { font-size: inherit; }
+h5 tt, h5 code { font-size: inherit; }
+h6 tt, h6 code { font-size: inherit; }
+h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+h3 { font-size: 1.5em; line-height: 1.43; }
+h4 { font-size: 1.25em; }
+h5 { font-size: 1em; }
+h6 { font-size: 1em; color: rgb(119, 119, 119); }
+p, blockquote, ul, ol, dl, table { margin: 0.8em 0px; }
+li > ol, li > ul { margin: 0px; }
+hr { height: 4px; padding: 0px; margin: 16px 0px; background-color: rgb(231, 231, 231); border-width: 0px 0px 1px; border-style: none none solid; border-top-color: initial; border-right-color: initial; border-left-color: initial; border-image: initial; overflow: hidden; box-sizing: content-box; border-bottom-color: rgb(221, 221, 221); }
+body > h2:first-child { margin-top: 0px; padding-top: 0px; }
+body > h1:first-child { margin-top: 0px; padding-top: 0px; }
+body > h1:first-child + h2 { margin-top: 0px; padding-top: 0px; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child { margin-top: 0px; padding-top: 0px; }
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 { margin-top: 0px; padding-top: 0px; }
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p { margin-top: 0px; }
+li p.first { display: inline-block; }
+ul, ol { padding-left: 30px; }
+ul:first-child, ol:first-child { margin-top: 0px; }
+ul:last-child, ol:last-child { margin-bottom: 0px; }
+blockquote { border-left: 4px solid rgb(221, 221, 221); padding: 0px 15px; color: rgb(119, 119, 119); }
+blockquote blockquote { padding-right: 0px; }
+table { padding: 0px; word-break: initial; }
+table tr { border-top: 1px solid rgb(204, 204, 204); background-color: white; margin: 0px; padding: 0px; }
+table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
+table tr th { font-weight: bold; border: 1px solid rgb(204, 204, 204); text-align: left; margin: 0px; padding: 6px 13px; }
+table tr td { border: 1px solid rgb(204, 204, 204); text-align: left; margin: 0px; padding: 6px 13px; }
+table tr th:first-child, table tr td:first-child { margin-top: 0px; }
+table tr th:last-child, table tr td:last-child { margin-bottom: 0px; }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); }
+.md-fences, code, tt { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); border-radius: 3px; font-family: Consolas, "Liberation Mono", Courier, monospace; padding: 2px 4px 0px; font-size: 0.9em; }
+.md-fences { margin-bottom: 15px; margin-top: 15px; padding: 8px 1em 6px; }
+.task-list { padding-left: 0px; }
+.task-list-item { padding-left: 32px; }
+.task-list-item input { top: 3px; left: 8px; }
+@media screen and (min-width: 914px) {
+}
+@media print {
+  html { font-size: 13px; }
+  table, pre { break-inside: avoid; }
+  pre { word-wrap: break-word; }
+}
+.md-fences { background-color: rgb(248, 248, 248); }
+#write pre.md-meta-block { padding: 1rem; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border: 0px; border-radius: 3px; color: rgb(119, 119, 119); margin-top: 0px !important; }
+.mathjax-block > .code-tooltip { bottom: 0.375rem; }
+#write > h3.md-focus::before { left: -1.5625rem; top: 0.375rem; }
+#write > h4.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h5.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+#write > h6.md-focus::before { left: -1.5625rem; top: 0.285714rem; }
+.md-image > .md-meta { border: 1px solid rgb(221, 221, 221); border-radius: 3px; font-family: Consolas, "Liberation Mono", Courier, monospace; padding: 2px 4px 0px; font-size: 0.9em; color: inherit; }
+.md-tag { color: inherit; }
+.md-toc { margin-top: 20px; padding-bottom: 20px; }
+#typora-quick-open { border: 1px solid rgb(221, 221, 221); background-color: rgb(248, 248, 248); }
+#typora-quick-open-item { background-color: rgb(250, 250, 250); border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238); border-style: solid; border-width: 1px; }
+#md-notification::before { top: 10px; }
+.on-focus-mode blockquote { border-left-color: rgba(85, 85, 85, 0.117647); }
+header, .context-menu, .megamenu-content, footer { font-family: "Segoe UI", Arial, sans-serif; }
+
+
+
+
+
+
+</style>
+</head>
+<body class='typora-export' >
+<div  id='write'  class = 'is-node'><h1><a name='header-c3453' class='md-header-anchor '></a>UBAS-BOSS业务运营支撑系统接口文档</h1><h6><a name='header-c3455' class='md-header-anchor '></a>v0.0.0.RELEASE</h6><div class='md-toc' mdtype='toc'><p class="md-toc-content"><span class="md-toc-item md-toc-h1" data-ref="c3453"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c3453">UBAS-BOSS业务运营支撑系统接口文档</a></span><span class="md-toc-item md-toc-h6" data-ref="c3455"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c3455">v0.0.0.RELEASE</a></span><span class="md-toc-item md-toc-h3" data-ref="c3459"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c3459">接口说明 1、添加一个区域</a></span><span class="md-toc-item md-toc-h3" data-ref="c3598"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c3598">接口说明 2、批量删除区域及子区域</a></span><span class="md-toc-item md-toc-h3" data-ref="c3692"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c3692">接口说明 3、批量恢复删除区域及子区域</a></span><span class="md-toc-item md-toc-h3" data-ref="c3788"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c3788">接口说明 4、批量更新区域</a></span><span class="md-toc-item md-toc-h3" data-ref="c3936"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c3936">接口说明 5、移动区域</a></span><span class="md-toc-item md-toc-h3" data-ref="c4039"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c4039">接口说明 6、查询区域</a></span><span class="md-toc-item md-toc-h3" data-ref="c4165"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c4165">接口说明 7、添加一个分组</a></span><span class="md-toc-item md-toc-h3" data-ref="c4295"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c4295">接口说明 8、批量删除分组</a></span><span class="md-toc-item md-toc-h3" data-ref="c4389"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c4389">接口说明 9、批量恢复删除分组</a></span><span class="md-toc-item md-toc-h3" data-ref="c4483"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c4483">接口说明 10、批量更新分组</a></span><span class="md-toc-item md-toc-h3" data-ref="c4625"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c4625">接口说明 11、移动分组</a></span><span class="md-toc-item md-toc-h3" data-ref="c4732"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c4732">接口说明 12、查询分组</a></span><span class="md-toc-item md-toc-h3" data-ref="c4858"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c4858">接口说明 13、添加一个注册用户</a></span><span class="md-toc-item md-toc-h3" data-ref="c5040"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c5040">接口说明 14、批量删除注册用户</a></span><span class="md-toc-item md-toc-h3" data-ref="c5135"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c5135">接口说明 15、批量恢复删除注册用户</a></span><span class="md-toc-item md-toc-h3" data-ref="c5230"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c5230">接口说明 16、批量更新注册用户信息</a></span><span class="md-toc-item md-toc-h3" data-ref="c5419"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c5419">接口说明 17、查询指定注册用户所属区域</a></span><span class="md-toc-item md-toc-h3" data-ref="c5515"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c5515">接口说明 18、分页获取注册用户所有信息</a></span><span class="md-toc-item md-toc-h3" data-ref="c5636"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c5636">接口说明 19、根据区域码获取注册用户所有信息</a></span><span class="md-toc-item md-toc-h3" data-ref="c5763"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c5763">接口说明 20、查询某终端用户是否已订购指定的业务包</a></span><span class="md-toc-item md-toc-h3" data-ref="c5860"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c5860">接口说明 21、注册用户设置区域</a></span><span class="md-toc-item md-toc-h3" data-ref="c5973"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c5973">接口说明 22、注册用户设置分组</a></span><span class="md-toc-item md-toc-h3" data-ref="c6087"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c6087">接口说明 23、注册用户设置业务包</a></span><span class="md-toc-item md-toc-h3" data-ref="c6215"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c6215">接口说明 24、新建一个业务包</a></span><span class="md-toc-item md-toc-h3" data-ref="c6340"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c6340">接口说明 25、批量删除业务包</a></span><span class="md-toc-item md-toc-h3" data-ref="c6436"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c6436">接口说明 26、批量恢复删除业务包</a></span><span class="md-toc-item md-toc-h3" data-ref="c6532"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c6532">接口说明 27、批量更新业务包</a></span><span class="md-toc-item md-toc-h3" data-ref="c6670"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c6670">接口说明 28、查询指定用户的业务包</a></span><span class="md-toc-item md-toc-h3" data-ref="c6762"><a class="md-toc-inner" style="cursor: pointer;" href="#header-c6762">接口说明 29、分页查询业务包</a></span></p></div><p>2017-03-24</p><h3><a name='header-c3459' class='md-header-anchor '></a>接口说明 1、添加一个区域</h3><ul><li>请求URL<br/></li></ul><blockquote><p>region/add</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST<br/></p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>value</td><td>是</td><td>String</td><td>区域名称</td></tr><tr><td></td><td>envalue</td><td>否</td><td>String</td><td>区域英文名称</td></tr><tr><td></td><td>parentGuid</td><td>否</td><td>String</td><td>父区域GUID</td></tr><tr><td></td><td>icon</td><td>否</td><td>String</td><td>图标</td></tr><tr><td></td><td>moveRestrict</td><td>是</td><td>String</td><td>拖动限制</td></tr><tr><td></td><td>indexUrl</td><td>否</td><td>String</td><td>区域入口</td></tr><tr><td></td><td>remark</td><td>否</td><td>String</td><td>备注</td></tr><tr><td></td><td>extdata</td><td>否</td><td>String</td><td>扩展数据</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot; __param&quot;: {
+        &quot;type&quot;: &quot;0&quot;, 
+        &quot;value&quot;: &quot;南京市&quot;, 
+        &quot;envalue&quot;: &quot;nanjing&quot;, 
+        &quot;pid&quot;: &quot;0&quot;, 
+        &quot;icon&quot;: &quot;&quot;, 
+        &quot;moveRestrict&quot;: &quot;2&quot;,
+        &quot;indexUrl&quot;: &quot;192.168.0&quot;, 
+        &quot;remark&quot;: &quot;&quot;, 
+        &quot;extdata&quot;: &quot;&quot;
+    }, 
+    &quot;jsonpFunc&quot;: &quot;&quot;
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/region\/add&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;:true, 
+    &quot;code&quot;: 200, 
+    &quot;data&quot;: [], 
+    &quot;method&quot;: &quot;add&quot;, 
+    &quot;action&quot;: &quot;\/region\/add&quot;, 
+    &quot;message&quot;: &quot;OK&quot;
+}</pre></blockquote><p></p><p>2017-03-24</p><h3><a name='header-c3598' class='md-header-anchor '></a>接口说明 2、批量删除区域及子区域</h3><ul><li>请求URL<br/></li></ul><blockquote><p>region/delete</p></blockquote><ul><li>请求方式<br/></li></ul><blockquote><p>POST<br/></p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>id</td><td>是</td><td>Array</td><td>一个或多个区域GUID</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;__param&quot;: {
+        &quot;id&quot;: [
+            &quot;e2r5t2633g456679&quot;, 
+            &quot;c445042d799b1efa&quot;
+        ]
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/region\/delete&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;:true, 
+    &quot;code&quot;: 200, 
+    &quot;data&quot;: [], 
+    &quot;method&quot;: &quot;add&quot;, 
+    &quot;action&quot;:&quot;\/region\/delete&quot;
+    &quot;message&quot;: &quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c3692' class='md-header-anchor '></a>接口说明 3、批量恢复删除区域及子区域</h3><ul><li>请求URL<br/></li></ul><blockquote><p>region/undelete</p></blockquote><ul><li>请求方式<br/></li></ul><blockquote><p>POST<br/></p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>id</td><td>是</td><td>Array</td><td>一个或多个区域GUID</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;__param&quot;: {
+        &quot;id&quot;: [
+            &quot;e2r5t2633g456679&quot;, 
+            &quot;c445042d799b1efa&quot;
+        ]
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/region\/undelete&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例<br/></li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{    
+   &quot;result&quot;:true,   
+   &quot;code&quot;: 200,  
+   &quot;data&quot;: [],  
+   &quot;method&quot;: &quot;undelete&quot;,   
+   &quot;action&quot;: &quot;\/region\/undelete&quot;, 
+   &quot;message&quot;: &quot;OK&quot;
+}  </pre></blockquote><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'></pre></blockquote><p>2017-03-24</p><h3><a name='header-c3788' class='md-header-anchor '></a>接口说明 4、批量更新区域</h3><ul><li>请求URL</li></ul><blockquote><p>region/set</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>id</td><td>是</td><td>String</td><td>区域GUID</td></tr><tr><td></td><td>value</td><td>是</td><td>String</td><td>区域名称</td></tr><tr><td></td><td>envalue</td><td>否</td><td>String</td><td>区域英文名称</td></tr><tr><td></td><td>parentGuid</td><td>否</td><td>String</td><td>父区域GUID</td></tr><tr><td></td><td>icon</td><td>否</td><td>String</td><td>图标</td></tr><tr><td></td><td>moveRestrict</td><td>是</td><td>String</td><td>拖动限制</td></tr><tr><td></td><td>indexUrl</td><td>是</td><td>String</td><td>区域入口</td></tr><tr><td></td><td>remark</td><td>否</td><td>String</td><td>备注</td></tr><tr><td></td><td>state</td><td>否</td><td>String</td><td>0：未冻结，1：冻结</td></tr><tr><td></td><td>extdata</td><td>否</td><td>String</td><td>扩展数据</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;__param&quot;: [
+        {
+            &quot;id&quot;: &quot;c445042d799b1efa&quot;, 
+            &quot;value&quot;: &quot;南京市&quot;, 
+            &quot;envalue&quot;: &quot;nanjing&quot;, 
+            &quot;icon&quot;: &quot;&quot;, 
+            &quot;remark&quot;: &quot;江苏省会&quot;, 
+            &quot;state&quot;: &quot;0&quot;, 
+            &quot;extdata&quot;: &quot;&quot;
+        }, 
+        {
+            &quot;id&quot;: &quot;e2r5t2633g456679&quot;, 
+            &quot;value&quot;: &quot;上海市&quot;, 
+            &quot;envalue&quot;: &quot;shanghai&quot;, 
+            &quot;icon&quot;: &quot;&quot;, 
+            &quot;remark&quot;: &quot;直辖市&quot;, 
+            &quot;state&quot;: &quot;0&quot;, 
+            &quot;extdata&quot;: &quot;&quot;
+        }
+    ], 
+    &quot;jsonpFunc&quot;: &quot;&quot;
+}
+</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/region\/set&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+   &quot;result&quot;:true,
+   &quot;code&quot;:200,
+   &quot;data&quot;:[],
+   &quot;method&quot;:&quot;add&quot;,
+   &quot;action&quot;:&quot;\/region\/set&quot;
+   &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c3936' class='md-header-anchor '></a>接口说明 5、移动区域</h3><ul><li>请求URL</li></ul><blockquote><p>region/move</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>id</td><td>是</td><td>String</td><td>区域GUID</td></tr><tr><td></td><td>pid</td><td>否</td><td>String</td><td>目标位置父区域GUID</td></tr><tr><td></td><td>sid</td><td>否</td><td>String</td><td>目标位置兄弟区域GUID</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;__param&quot;: {
+        &quot;id&quot;: &quot;cf24ec68nl90343g&quot;, 
+        &quot;pid&quot;: &quot;e2r5t2633g456679&quot;, 
+        &quot;sid&quot;: &quot;e2r5t2633g456679&quot;
+    }, 
+    &quot;jsonpFunc&quot;: &quot;&quot;
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/region\/move&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li><li>​</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+     &quot;result&quot;:true,
+     &quot;code&quot;:200,
+     &quot;data&quot;:[],
+     &quot;method&quot;:&quot;move&quot;,
+     &quot;action&quot;:&quot;\/region\/move&quot;
+     &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c4039' class='md-header-anchor '></a>接口说明 6、查询区域</h3><ul><li>请求URL</li></ul><blockquote><p>region/get</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>pid</td><td>否</td><td>String</td><td>父区域GUID</td></tr><tr><td></td><td>depth</td><td>否</td><td>String</td><td>区域查询深度</td></tr><tr><td></td><td>pageSize</td><td>否</td><td>String</td><td>每页显示一级区域数目</td></tr><tr><td></td><td>startPage</td><td>否</td><td>String</td><td>起始页</td></tr><tr><td></td><td>endPage</td><td>否</td><td>String</td><td>结束页</td></tr><tr><td></td><td>state</td><td>否</td><td>String</td><td>区域状态</td></tr><tr><td></td><td>keyword</td><td>否</td><td>String</td><td>查询关键字</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;clientGuid&quot;: {
+        &quot;pid&quot;: &quot;&quot;, 
+        &quot;depth&quot;: &quot;&quot;, 
+        &quot;pageSize&quot;: &quot;10&quot;, 
+        &quot;startPage&quot;: &quot;1&quot;, 
+        &quot;endPage&quot;: &quot;2&quot;, 
+        &quot;state&quot;: &quot;0&quot;, 
+        &quot;type&quot;: &quot;0&quot;, 
+        &quot;jsonpFunc&quot;: &quot;&quot;, 
+        &quot;queryType&quot;: &quot;&quot;, 
+        &quot;queryParam&quot;: &quot;&quot;
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/region\/get&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;: true, 
+    &quot;code&quot;: 200, 
+    &quot;method&quot;: &quot;get&quot;, 
+    &quot;data&quot;: {
+        &quot;regions&quot;: [
+            {
+                &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                &quot;level&quot;: 1, 
+                &quot;sortNumber&quot;: 6, 
+                &quot;extdata&quot;: &quot;扩展信息&quot;, 
+                &quot;icon&quot;: &quot;&quot;, 
+                &quot;indexUrl&quot;: &quot;192.168.0&quot;, 
+                &quot;remark&quot;: &quot;江苏省会&quot;, 
+                &quot;type&quot;: 1, 
+                &quot;delete&quot;: 0, 
+                &quot;parentGuid&quot;: &quot;0&quot;, 
+                &quot;guid&quot;: &quot;b0fa1adca18f653b&quot;, 
+                &quot;id&quot;: 36, 
+                &quot;state&quot;: 0, 
+                &quot;moveRestrict&quot;: 2, 
+                &quot;value&quot;: &quot;南京市&quot;, 
+                &quot;envalue&quot;: &quot;nanjing&quot;
+            }, 
+            {
+                &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                &quot;level&quot;: 1, 
+                &quot;sortNumber&quot;: 1, 
+                &quot;extdata&quot;: &quot;&quot;, 
+                &quot;icon&quot;: &quot;&quot;, 
+                &quot;indexUrl&quot;: &quot;&quot;, 
+                &quot;remark&quot;: &quot;&quot;, 
+                &quot;type&quot;: 1, 
+                &quot;delete&quot;: 0, 
+                &quot;parentGuid&quot;: &quot;0&quot;, 
+                &quot;guid&quot;: &quot;c4r1x4455f577616&quot;, 
+                &quot;id&quot;: 17, 
+                &quot;state&quot;: 0, 
+                &quot;moveRestrict&quot;: 2, 
+                &quot;value&quot;: &quot;佛山市&quot;, 
+                &quot;envalue&quot;: &quot;&quot;
+            }, 
+            {
+                &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                &quot;level&quot;: 1, 
+                &quot;sortNumber&quot;: 0, 
+                &quot;extdata&quot;: &quot;&quot;, 
+                &quot;icon&quot;: &quot;&quot;, 
+                &quot;indexUrl&quot;: &quot;&quot;, 
+                &quot;remark&quot;: &quot;&quot;, 
+                &quot;type&quot;: 1, 
+                &quot;delete&quot;: 0, 
+                &quot;parentGuid&quot;: &quot;0&quot;, 
+                &quot;guid&quot;: &quot;e2r5t2633g456679&quot;, 
+                &quot;id&quot;: 1, 
+                &quot;state&quot;: 0, 
+                &quot;moveRestrict&quot;: 2, 
+                &quot;value&quot;: &quot;上海&quot;, 
+                &quot;envalue&quot;: &quot;shanghai&quot;, 
+                &quot;child&quot;: [
+                    {
+               &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                        &quot;level&quot;: 2, 
+                        &quot;sortNumber&quot;: 2, 
+                        &quot;extdata&quot;: &quot;&quot;, 
+                        &quot;icon&quot;: &quot;&quot;, 
+                        &quot;indexUrl&quot;: &quot;&quot;, 
+                        &quot;remark&quot;: &quot;&quot;, 
+                        &quot;type&quot;: 1, 
+                        &quot;delete&quot;: 0, 
+                        &quot;parentGuid&quot;: &quot;e2r5t2633g456679&quot;, 
+                        &quot;guid&quot;: &quot;vt62ym78bg45670t&quot;, 
+                        &quot;id&quot;: 10, 
+                        &quot;state&quot;: 0, 
+                        &quot;moveRestrict&quot;: 2, 
+                        &quot;value&quot;: &quot;徐汇区&quot;, 
+                        &quot;envalue&quot;: &quot;&quot;
+                    }, 
+                    {
+                        &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                        &quot;level&quot;: 2, 
+                        &quot;sortNumber&quot;: 1, 
+                        &quot;extdata&quot;: &quot;&quot;, 
+                        &quot;icon&quot;: &quot;&quot;, 
+                        &quot;indexUrl&quot;: &quot;&quot;, 
+                        &quot;remark&quot;: &quot;&quot;, 
+                        &quot;type&quot;: 1, 
+                        &quot;delete&quot;: 0, 
+                        &quot;parentGuid&quot;: &quot;e2r5t2633g456679&quot;, 
+                        &quot;guid&quot;: &quot;f3d6a2477e835972&quot;, 
+                        &quot;id&quot;: 8, 
+                        &quot;state&quot;: 0, 
+                        &quot;moveRestrict&quot;: 2, 
+                        &quot;value&quot;: &quot;闵行区&quot;, 
+                        &quot;envalue&quot;: &quot;&quot;, 
+                        &quot;child&quot;: [
+                            {
+                                &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                                &quot;level&quot;: 3, 
+                                &quot;sortNumber&quot;: 0, 
+                                &quot;extdata&quot;: &quot;&quot;, 
+                                &quot;icon&quot;: &quot;&quot;, 
+                                &quot;indexUrl&quot;: &quot;&quot;, 
+                                &quot;remark&quot;: &quot;&quot;, 
+                                &quot;type&quot;: 1, 
+                                &quot;delete&quot;: 0, 
+                                &quot;parentGuid&quot;: &quot;f3d6a2477e835972&quot;, 
+                                &quot;guid&quot;: &quot;cd92ba17ff58968f&quot;, 
+                                &quot;id&quot;: 9, 
+                                &quot;state&quot;: 0, 
+                                &quot;moveRestrict&quot;: 2, 
+                                &quot;value&quot;: &quot;华漕镇&quot;, 
+                                &quot;envalue&quot;: &quot;&quot;, 
+                                &quot;child&quot;: [
+                                    {
+                                        &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                                        &quot;level&quot;: 4, 
+                                        &quot;sortNumber&quot;: 1, 
+                                        &quot;extdata&quot;: &quot;&quot;, 
+                                        &quot;icon&quot;: &quot;&quot;, 
+                                        &quot;indexUrl&quot;: &quot;&quot;, 
+                                        &quot;remark&quot;: &quot;&quot;, 
+                                        &quot;type&quot;: 1, 
+                                        &quot;delete&quot;: 0, 
+                                        &quot;parentGuid&quot;: &quot;cd92ba17ff58968f&quot;, 
+                                        &quot;guid&quot;: &quot;cd5779d4y664e776&quot;, 
+                                        &quot;id&quot;: 12, 
+                                        &quot;state&quot;: 0, 
+                                        &quot;moveRestrict&quot;: 2, 
+                                        &quot;value&quot;: &quot;建设村&quot;, 
+                                        &quot;envalue&quot;: &quot;&quot;
+                                    }, 
+                                    {
+                                        &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                                        &quot;level&quot;: 4, 
+                                        &quot;sortNumber&quot;: 0, 
+                                        &quot;extdata&quot;: &quot;&quot;, 
+                                        &quot;icon&quot;: &quot;&quot;, 
+                                        &quot;indexUrl&quot;: &quot;&quot;, 
+                                        &quot;remark&quot;: &quot;&quot;, 
+                                        &quot;type&quot;: 1, 
+                                        &quot;delete&quot;: 0, 
+                                        &quot;parentGuid&quot;: &quot;cd92ba17ff58968f&quot;, 
+                                        &quot;guid&quot;: &quot;cf24ec68nl90343g&quot;, 
+                                        &quot;id&quot;: 11, 
+                                        &quot;state&quot;: 0, 
+                                        &quot;moveRestrict&quot;: 2, 
+                                        &quot;value&quot;: &quot;红星村&quot;, 
+                                        &quot;envalue&quot;: &quot;&quot;
+                                    }
+                                ]
+                            }
+                        ]
+                    }, 
+                    {
+                        &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                        &quot;level&quot;: 2, 
+                        &quot;sortNumber&quot;: 0, 
+                        &quot;extdata&quot;: &quot;&quot;, 
+                        &quot;icon&quot;: &quot;&quot;, 
+                        &quot;indexUrl&quot;: &quot;&quot;, 
+                        &quot;remark&quot;: &quot;&quot;, 
+                        &quot;type&quot;: 1, 
+                        &quot;delete&quot;: 0, 
+                        &quot;parentGuid&quot;: &quot;e2r5t2633g456679&quot;, 
+                        &quot;guid&quot;: &quot;un4664f7y771e888&quot;, 
+                        &quot;id&quot;: 2, 
+                        &quot;state&quot;: 0, 
+                        &quot;moveRestrict&quot;: 2, 
+                        &quot;value&quot;: &quot;黄浦区&quot;, 
+                        &quot;envalue&quot;: &quot;huangpu&quot;
+                    }
+                ]
+            }
+        ]
+    }, 
+    &quot;action&quot;: &quot;\/region\/get&quot;, 
+    &quot;message&quot;: &quot;ok&quot;
+}</pre></blockquote><p></p><p>2017-03-24</p><h3><a name='header-c4165' class='md-header-anchor '></a>接口说明 7、添加一个分组</h3><ul><li>请求URL</li></ul><blockquote><p>group/add</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>value</td><td>是</td><td>String</td><td>分组名称</td></tr><tr><td></td><td>envalue</td><td>否</td><td>String</td><td>分组英文名称</td></tr><tr><td></td><td>parentGuid</td><td>否</td><td>String</td><td>父区域GUID</td></tr><tr><td></td><td>icon</td><td>否</td><td>String</td><td>图标</td></tr><tr><td></td><td>moveRestrict</td><td>是</td><td>String</td><td>拖动限制</td></tr><tr><td></td><td>remark</td><td>否</td><td>String</td><td>备注</td></tr><tr><td></td><td>extdata</td><td>否</td><td>String</td><td>扩展数据</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot; __param&quot;: {
+        &quot;type&quot;: &quot;0&quot;, 
+        &quot;value&quot;: &quot;免费用户&quot;, 
+        &quot;envalue&quot;: &quot;free&quot;, 
+        &quot;pid&quot;: &quot;0&quot;, 
+        &quot;icon&quot;: &quot;&quot;, 
+        &quot;moveRestrict&quot;: &quot;2&quot;, 
+        &quot;remark&quot;: &quot;&quot;, 
+        &quot;extdata&quot;: &quot;&quot;
+    }, 
+    &quot;jsonpFunc&quot;: &quot;&quot;
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/group\/add&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息​</td></tr></tbody></table></blockquote><ul><li>返回示例<br/></li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;:true,
+    &quot;code&quot;:200,
+    &quot;data&quot;:[],
+    &quot;method&quot;:&quot;add&quot;,
+    &quot;action&quot;:&quot;\/group\/add&quot;
+    &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c4295' class='md-header-anchor '></a>接口说明 8、批量删除分组</h3><ul><li>请求URL</li></ul><blockquote><p>group/delete</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>id</td><td>是</td><td>Array</td><td>一个或多个分组GUID</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;__param&quot;: {
+        &quot;id&quot;: [
+            &quot;e2r5t2633g456679&quot;, 
+            &quot;c445042d799b1efa&quot;
+        ]
+    }
+}
+</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/group\/delete&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;:true,
+    &quot;code&quot;:200,
+    &quot;data&quot;:[],
+    &quot;method&quot;:&quot;delete&quot;,
+    &quot;action&quot;:&quot;\/group\/delete&quot;
+    &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c4389' class='md-header-anchor '></a>接口说明 9、批量恢复删除分组</h3><ul><li>请求URL</li></ul><blockquote><p>region/undelete</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>id</td><td>是</td><td>Array</td><td>一个或多个分组GUID</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;__param&quot;: {
+        &quot;id&quot;: [
+            &quot;e2r5t2633g456679&quot;, 
+            &quot;c445042d799b1efa&quot;
+        ]
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/group\/undelete&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+     &quot;result&quot;:true,
+     &quot;code&quot;:200,
+     &quot;data&quot;:[],
+     &quot;method&quot;:&quot;undelete&quot;,
+     &quot;action&quot;:&quot;\/group\/undelete&quot;
+     &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c4483' class='md-header-anchor '></a>接口说明 10、批量更新分组</h3><ul><li>请求UR</li></ul><blockquote><p>group/set</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>id</td><td>是</td><td>String</td><td>分组GUID</td></tr><tr><td></td><td>value</td><td>是</td><td>String</td><td>分组名称</td></tr><tr><td></td><td>envalue</td><td>否</td><td>String</td><td>分组英文名称</td></tr><tr><td></td><td>parentGuid</td><td>否</td><td>String</td><td>父分组GUID</td></tr><tr><td></td><td>icon</td><td>否</td><td>String</td><td>图标</td></tr><tr><td></td><td>moveRestrict</td><td>是</td><td>String</td><td>拖动限制</td></tr><tr><td></td><td>remark</td><td>否</td><td>String</td><td>备注</td></tr><tr><td></td><td>state</td><td>否</td><td>String</td><td>0：未冻结，1：冻结</td></tr><tr><td></td><td>extdata</td><td>否</td><td>String</td><td>扩展数据</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;__param&quot;: [
+        {
+            &quot;id&quot;: &quot; abe849eb62a8cdc7&quot;, 
+            &quot;remark&quot;: &quot;用于测试的&quot;
+        }, 
+        {
+            &quot;id&quot;: &quot;e2r5t2633g456679&quot;, 
+            &quot;state&quot;: &quot;1&quot;
+        }
+    ], 
+    &quot;jsonpFunc&quot;: &quot;&quot;
+}
+</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/group\/set&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;:true,
+    &quot;code&quot;:200,
+    &quot;data&quot;:[],
+    &quot;method&quot;:&quot;set&quot;,
+    &quot;action&quot;:&quot;\/group\/set&quot;
+    &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c4625' class='md-header-anchor '></a>接口说明 11、移动分组</h3><ul><li>请求URL</li></ul><blockquote><p>group/move</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>id</td><td>是</td><td>String</td><td>分组GUID</td></tr><tr><td></td><td>pid</td><td>否</td><td>String</td><td>目标位置父分组GUID</td></tr><tr><td></td><td>sid</td><td>否</td><td>String</td><td>目标位置兄弟分组GUID</td></tr></tbody></table></blockquote><ul><li>请求示例1：
+将GUID为abe849eb62a8cdc7的分组拖到GUID为e9ea9de185c89c62的分组下，使两个分组成为同一级别的兄弟分组。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;__param&quot;: {
+        &quot;id&quot;: &quot;abe849eb62a8cdc7&quot;, 
+        &quot;pid&quot;: &quot;&quot;, 
+        &quot;sid&quot;: &quot;e9ea9de185c89c62&quot;
+    }, 
+    &quot;jsonpFunc&quot;: &quot;&quot;
+}</pre></blockquote><ul><li>请求示例2：
+将GUID为abe849eb62a8cdc7的区域拖到GUID为e9ea9de185c89c62的区域下，使前者成为后者的子区域。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;__param&quot;: {
+        &quot;id&quot;: &quot;abe849eb62a8cdc7&quot;, 
+        &quot;pid&quot;: &quot;e9ea9de185c89c62&quot;, 
+        &quot;sid&quot;: &quot; &quot;
+    }, 
+    &quot;jsonpFunc&quot;: &quot;&quot;
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/group\/move&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;:true,
+    &quot;code&quot;:200,
+    &quot;data&quot;:[],
+    &quot;method&quot;:&quot;move&quot;,
+    &quot;action&quot;:&quot;\/group\/move&quot;
+    &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c4732' class='md-header-anchor '></a>接口说明 12、查询分组</h3><ul><li>请求URL</li></ul><blockquote><p>group/get</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>pid</td><td>否</td><td>String</td><td>父分组GUID</td></tr><tr><td></td><td>depth</td><td>否</td><td>String</td><td>分组查询深度</td></tr><tr><td></td><td>pageSize</td><td>否</td><td>String</td><td>每页显示一级分组数目</td></tr><tr><td></td><td>startPage</td><td>否</td><td>String</td><td>起始页</td></tr><tr><td></td><td>endPage</td><td>否</td><td>String</td><td>结束页</td></tr><tr><td></td><td>state</td><td>否</td><td>String</td><td>分组状态</td></tr><tr><td></td><td>keyword</td><td>否</td><td>String</td><td>查询关键字</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;clientGuid&quot;: {
+        &quot;pid&quot;: &quot;&quot;, 
+        &quot;depth&quot;: &quot;&quot;, 
+        &quot;pageSize&quot;: &quot;10&quot;, 
+        &quot;startPage&quot;: &quot;1&quot;, 
+        &quot;endPage&quot;: &quot;2&quot;, 
+        &quot;state&quot;: &quot;0&quot;, 
+        &quot;type&quot;: &quot;0&quot;, 
+        &quot;jsonpFunc&quot;: &quot;&quot;, 
+        &quot;queryType&quot;: &quot;&quot;, 
+        &quot;queryParam&quot;: &quot;&quot;
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/group\/get&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;: true, 
+    &quot;code&quot;: 200, 
+    &quot;method&quot;: &quot;get&quot;, 
+    &quot;data&quot;: [
+        {
+            &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+            &quot;level&quot;: 1, 
+            &quot;sortNumber&quot;: 6, 
+            &quot;extdata&quot;: &quot;&quot;, 
+            &quot;icon&quot;: &quot;&quot;, 
+            &quot;remark&quot;: &quot;&quot;, 
+            &quot;type&quot;: 2, 
+            &quot;delete&quot;: 0, 
+            &quot;parentGuid&quot;: &quot;0&quot;, 
+            &quot;guid&quot;: &quot;e9ea9de185c89c62&quot;, 
+            &quot;id&quot;: 34, 
+            &quot;state&quot;: 0, 
+            &quot;moveRestrict&quot;: 2, 
+            &quot;value&quot;: &quot;免费用户&quot;, 
+            &quot;envalue&quot;: &quot;free&quot;
+        }
+    ], 
+    &quot;action&quot;: &quot;/get&quot;, 
+    &quot;message&quot;: &quot;ok&quot;
+}
+</pre></blockquote><p></p><p>2017-03-24</p><h3><a name='header-c4858' class='md-header-anchor '></a>接口说明 13、添加一个注册用户</h3><blockquote><p>termUser/add</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>type</td><td>是</td><td>String</td><td>用户类型:1表示集团，2表示个人，3表示VIP</td></tr><tr><td></td><td>bossID</td><td>否</td><td>String</td><td>区域英文名称</td></tr><tr><td></td><td>bossArea</td><td>否</td><td>String</td><td>父区域GUID</td></tr><tr><td></td><td>bossCity</td><td>否</td><td>String</td><td>图标</td></tr><tr><td></td><td>name</td><td>是</td><td>String</td><td>注册用户名</td></tr><tr><td></td><td>idCard</td><td>否</td><td>String</td><td>注册用户身份证</td></tr><tr><td></td><td>sex</td><td>是</td><td>String</td><td>注册用户性别</td></tr><tr><td></td><td>age</td><td>否</td><td>String</td><td>注册用户年龄</td></tr><tr><td></td><td>birthday</td><td>否</td><td>String</td><td>注册用户出生日期</td></tr><tr><td></td><td>addr</td><td>否</td><td>String</td><td>注册用户地址</td></tr><tr><td></td><td>iphone</td><td>是</td><td>String</td><td>注册用户手机</td></tr><tr><td></td><td>mobile</td><td>否</td><td>String</td><td>注册用户固定电话</td></tr><tr><td></td><td>email</td><td>否</td><td>String</td><td>注册用户邮箱</td></tr><tr><td></td><td>intergration</td><td>是</td><td>String</td><td>注册用户积分</td></tr><tr><td></td><td>level</td><td>是</td><td>String</td><td>注册用户级别</td></tr><tr><td></td><td>ext</td><td>否</td><td>String</td><td>扩展信息</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;level&quot;: &quot;0&quot;, 
+        &quot;email&quot;: &quot;sina@169.com&quot;, 
+        &quot;bossCity&quot;: &quot;SHSJ&quot;, 
+        &quot;mobile&quot;: &quot;2937429&quot;, 
+        &quot;type&quot;: &quot;1&quot;, 
+        &quot;ext&quot;: &quot;备用字段&quot;, 
+        &quot;intergration&quot;: &quot;80&quot;, 
+        &quot;name&quot;: &quot;张三&quot;, 
+        &quot;bossID&quot;: &quot;200000001&quot;, 
+        &quot;idCard&quot;: &quot;1212122321&quot;, 
+        &quot;bossArea&quot;: &quot;0001&quot;, 
+        &quot;addr&quot;: &quot;上海市徐汇区漕河泾开发区&quot;, 
+        &quot;iphone&quot;: &quot;1800012012&quot;, 
+        &quot;age&quot;: &quot;29&quot;, 
+        &quot;birthday&quot;: &quot;2001.01.01&quot;, 
+        &quot;sex&quot;: &quot;男&quot;
+    }
+}
+</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/termUser\/add&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+     &quot;result&quot;:true,
+     &quot;code&quot;:200,
+     &quot;data&quot;:[],
+     &quot;method&quot;:&quot;add&quot;,
+     &quot;action&quot;:&quot;\/termUser\/add&quot;
+     &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p></p><p>2017-03-24</p><h3><a name='header-c5040' class='md-header-anchor '></a>接口说明 14、批量删除注册用户</h3><ul><li>请求URL</li></ul><blockquote><p>termUser/delete</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>GUIDs</td><td>是</td><td>Array</td><td>一个或多个用户GUID</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例:
+删除GUID为6d1aba19-905e-4e3f-b02b-bfbad6bb4548和57c379ba-0f51-4309-83ed-637c7aae7ead的注册用户。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;GUIDs&quot;: [
+            &quot;6d1aba19-905e-4e3f-b02b-bfbad6bb4548&quot;, 
+            &quot;57c379ba-0f51-4309-83ed-637c7aae7ead&quot;
+        ]
+    }
+}
+</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/termUser\/del&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+      &quot;result&quot;:true,
+      &quot;code&quot;:200,
+      &quot;data&quot;:[],
+      &quot;method&quot;:&quot;del&quot;,
+      &quot;action&quot;:&quot;\/termUser\/del&quot;
+      &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c5135' class='md-header-anchor '></a>接口说明 15、批量恢复删除注册用户</h3><ul><li>请求URL-</li></ul><blockquote><p>termUser/unDel</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>GUIDs</td><td>是</td><td>Array</td><td>一个或多个用户GUID</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例:
+恢复删除GUID为6d1aba19-905e-4e3f-b02b-bfbad6bb4548和57c379ba-0f51-4309-83ed-637c7aae7ead的注册用户。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;GUIDs&quot;: [
+            &quot;6d1aba19-905e-4e3f-b02b-bfbad6bb4548&quot;, 
+            &quot;57c379ba-0f51-4309-83ed-637c7aae7ead&quot;
+        ]
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/termUser\/unDel&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+      &quot;result&quot;:true,
+      &quot;code&quot;:200,
+      &quot;data&quot;:[],
+      &quot;method&quot;:&quot;unDel&quot;,
+      &quot;action&quot;:&quot;\/termUser\/unDel&quot;
+      &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c5230' class='md-header-anchor '></a>接口说明 16、批量更新注册用户信息</h3><blockquote><p>termUser/set</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>GUID</td><td>是</td><td>String</td><td>注册用户GUID</td></tr><tr><td></td><td>type</td><td>是</td><td>String</td><td>用户类型:1表示集团，2表示个人，3表示VIP</td></tr><tr><td></td><td>bossID</td><td>否</td><td>String</td><td>区域英文名称</td></tr><tr><td></td><td>bossArea</td><td>否</td><td>String</td><td>父区域GUID</td></tr><tr><td></td><td>bossCity</td><td>否</td><td>String</td><td>图标</td></tr><tr><td></td><td>name</td><td>是</td><td>String</td><td>注册用户名</td></tr><tr><td></td><td>idCard</td><td>否</td><td>String</td><td>注册用户身份证</td></tr><tr><td></td><td>sex</td><td>是</td><td>String</td><td>注册用户性别</td></tr><tr><td></td><td>age</td><td>否</td><td>String</td><td>注册用户年龄</td></tr><tr><td></td><td>birthday</td><td>否</td><td>String</td><td>注册用户出生日期</td></tr><tr><td></td><td>addr</td><td>否</td><td>String</td><td>注册用户地址</td></tr><tr><td></td><td>iphone</td><td>是</td><td>String</td><td>注册用户手机</td></tr><tr><td></td><td>mobile</td><td>否</td><td>String</td><td>注册用户固定电话</td></tr><tr><td></td><td>email</td><td>否</td><td>String</td><td>注册用户邮箱</td></tr><tr><td></td><td>intergration</td><td>是</td><td>String</td><td>注册用户积分</td></tr><tr><td></td><td>level</td><td>是</td><td>String</td><td>注册用户级别</td></tr><tr><td></td><td>ext</td><td>否</td><td>String</td><td>扩展信息</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例:
+将GUID为37ae03d3-0216-4e0c-ba1a-0ded9ed5befc的用户的用户类型改为2、将GUID为28441092-879b-4dbc-bba6-4f65c675d480的用户的用户类型改为3，并将用户等级改为2。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: [
+        {
+            &quot;GUID&quot;: &quot;37ae03d3-0216-4e0c-ba1a-0ded9ed5befc&quot;, 
+            &quot;type&quot;: &quot;2&quot;
+        }, 
+        {
+            &quot;GUID&quot;: &quot;28441092-879b-4dbc-bba6-4f65c675d480&quot;, 
+            &quot;type&quot;: &quot;3&quot;, 
+            &quot;level&quot;: &quot;2&quot;
+        }
+    ]
+}
+</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/termUser\/set&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+      &quot;result&quot;:true,
+      &quot;code&quot;:200,
+      &quot;data&quot;:[],
+      &quot;method&quot;:&quot;set&quot;,
+      &quot;action&quot;:&quot;\/termUser\/set&quot;
+      &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p></p><p>2017-03-24</p><h3><a name='header-c5419' class='md-header-anchor '></a>接口说明 17、查询指定注册用户所属区域</h3><ul><li>请求URL</li></ul><blockquote><p>termUser/getRegionsByTermUser</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>field</td><td>是</td><td>String</td><td>某个能唯一表示注册用户的字段（mac/ip/serial/cacard/serviceGroup）</td></tr><tr><td></td><td>uniqueKey</td><td>是</td><td>String</td><td>字段的值</td></tr></tbody></table></blockquote><ul><li>请求示例：</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;field&quot;: &quot;mac&quot;, 
+        &quot;uniqueKey&quot;: &quot;1a-2b-3c-4d-5f-6e&quot;
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/termUser\/getRegionsByTermUser&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;: true, 
+    &quot;code&quot;: 200, 
+    &quot;method&quot;: &quot;getRegionsByTermUser&quot;, 
+    &quot;data&quot;: {
+        &quot;regions&quot;: [
+            {
+                &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                &quot;level&quot;: 4, 
+                &quot;sortNumber&quot;: 1, 
+                &quot;extdata&quot;: &quot;&quot;, 
+                &quot;icon&quot;: &quot;&quot;, 
+                &quot;indexUrl&quot;: &quot;&quot;, 
+                &quot;remark&quot;: &quot;&quot;, 
+                &quot;type&quot;: 1, 
+                &quot;delete&quot;: 0, 
+                &quot;parentGuid&quot;: &quot;cd92ba17ff58968f&quot;, 
+                &quot;guid&quot;: &quot;cd5779d4y664e776&quot;, 
+                &quot;id&quot;: 12, 
+                &quot;state&quot;: 0, 
+                &quot;moveRestrict&quot;: 2, 
+                &quot;value&quot;: &quot;建设村&quot;, 
+                &quot;envalue&quot;: &quot;&quot;
+            }, 
+            {
+                &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                &quot;level&quot;: 4, 
+                &quot;sortNumber&quot;: 0, 
+                &quot;extdata&quot;: &quot;&quot;, 
+                &quot;icon&quot;: &quot;&quot;, 
+                &quot;indexUrl&quot;: &quot;&quot;, 
+                &quot;remark&quot;: &quot;&quot;, 
+                &quot;type&quot;: 1, 
+                &quot;delete&quot;: 0, 
+                &quot;parentGuid&quot;: &quot;cd92ba17ff58968f&quot;, 
+                &quot;guid&quot;: &quot;cf24ec68nl90343g&quot;, 
+                &quot;id&quot;: 11, 
+                &quot;state&quot;: 0, 
+                &quot;moveRestrict&quot;: 2, 
+                &quot;value&quot;: &quot;红星村&quot;, 
+                &quot;envalue&quot;: &quot;&quot;
+            }
+        ]
+    }, 
+    &quot;action&quot;: &quot;\/termUser\/getRegionsByTermUser&quot;, 
+    &quot;message&quot;: &quot;ok&quot;
+}
+</pre></blockquote><p></p><p>2017-03-24</p><h3><a name='header-c5515' class='md-header-anchor '></a>接口说明 18、分页获取注册用户所有信息</h3><ul><li>请求URL</li></ul><blockquote><p>termUser/get</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>pageSize</td><td>是</td><td>String</td><td>每页记录数</td></tr><tr><td></td><td>page</td><td>是</td><td>String</td><td>页码</td></tr><tr><td></td><td>type</td><td>否</td><td>String</td><td>注册用户类型</td></tr><tr><td></td><td>deleted</td><td>否</td><td>String</td><td>是否删除</td></tr><tr><td></td><td>freezed</td><td>否</td><td>String</td><td>区域状态</td></tr><tr><td></td><td>keyword</td><td>否</td><td>String</td><td>查询关键字</td></tr></tbody></table></blockquote><ul><li>请求示例：
+获取两条记录</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;pageSize&quot;: &quot;2&quot;, 
+        &quot;page&quot;: &quot;1&quot;, 
+        &quot;keyword&quot;: &quot;&quot;, 
+        &quot;type&quot;: &quot;1&quot;, 
+        &quot;freezed&quot;: &quot;0&quot;
+    }
+}
+</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/termUser\/get&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;: true, 
+    &quot;code&quot;: 200, 
+    &quot;method&quot;: &quot;get&quot;, 
+    &quot;data&quot;: {
+        &quot;total&quot;: 3450, 
+        &quot;totalPages&quot;: 1725, 
+        &quot;termUsers&quot;: [
+            {
+                &quot;bossCity&quot;: &quot;SHSJ&quot;, 
+                &quot;birthday&quot;: &quot;2001.01.01&quot;, 
+                &quot;regions&quot;: null, 
+                &quot;bossID&quot;: &quot;200000001&quot;, 
+                &quot;updateUserID&quot;: &quot;0&quot;, 
+                &quot;idCard&quot;: &quot;7660063151&quot;, 
+                &quot;type&quot;: &quot;1&quot;, 
+                &quot;hasRegion&quot;: -1, 
+                &quot;hasGroup&quot;: -1, 
+                &quot;id&quot;: 10370, 
+                &quot;addr&quot;: &quot;上海市徐汇区漕河泾开发区&quot;, 
+                &quot;email&quot;: &quot;sina@169.com&quot;, 
+                &quot;group&quot;: { }, 
+                &quot;ext&quot;: &quot;新用户&quot;, 
+                &quot;bossArea&quot;: &quot;0001&quot;, 
+                &quot;createUserID&quot;: &quot;&quot;, 
+                &quot;level&quot;: &quot;0&quot;, 
+                &quot;sex&quot;: &quot;男&quot;, 
+                &quot;GUID&quot;: &quot;10174ef5-7d27-4503-aac1-6831d456b35b&quot;, 
+                &quot;mobile&quot;: &quot;7782862&quot;, 
+                &quot;intergration&quot;: &quot;0&quot;, 
+                &quot;updateTime&quot;: &quot;2017/03/06 11:35:59&quot;, 
+                &quot;iphone&quot;: &quot;1825287231&quot;, 
+                &quot;freezed&quot;: &quot;0&quot;, 
+                &quot;deleted&quot;: &quot;0&quot;, 
+                &quot;createTime&quot;: &quot;2017/03/06 11:35:59&quot;, 
+                &quot;name&quot;: &quot;黄黄54140&quot;, 
+                &quot;age&quot;: &quot;21&quot;
+            }, 
+            {
+                &quot;bossCity&quot;: &quot;SHSJ&quot;, 
+                &quot;birthday&quot;: &quot;2001.01.01&quot;, 
+                &quot;regions&quot;: null, 
+                &quot;bossID&quot;: &quot;200000001&quot;, 
+                &quot;updateUserID&quot;: &quot;0&quot;, 
+                &quot;idCard&quot;: &quot;6337471856&quot;, 
+                &quot;type&quot;: &quot;1&quot;, 
+                &quot;hasRegion&quot;: -1, 
+                &quot;hasGroup&quot;: -1, 
+                &quot;id&quot;: 10369, 
+                &quot;addr&quot;: &quot;上海市徐汇区漕河泾开发区&quot;, 
+                &quot;email&quot;: &quot;sina@169.com&quot;, 
+                &quot;group&quot;: { }, 
+                &quot;ext&quot;: &quot;新用户&quot;, 
+                &quot;bossArea&quot;: &quot;0001&quot;, 
+                &quot;createUserID&quot;: &quot;&quot;, 
+                &quot;level&quot;: &quot;0&quot;, 
+                &quot;sex&quot;: &quot;男&quot;, 
+                &quot;GUID&quot;: &quot;757ddd28-7b0b-4a2e-9366-446ff6611841&quot;, 
+                &quot;mobile&quot;: &quot;1453177&quot;, 
+                &quot;intergration&quot;: &quot;0&quot;, 
+                &quot;updateTime&quot;: &quot;2017/03/06 11:35:58&quot;, 
+                &quot;iphone&quot;: &quot;3637586531&quot;, 
+                &quot;freezed&quot;: &quot;0&quot;, 
+                &quot;deleted&quot;: &quot;0&quot;, 
+                &quot;createTime&quot;: &quot;2017/03/06 11:35:58&quot;, 
+                &quot;name&quot;: &quot;黄黄29770&quot;, 
+                &quot;age&quot;: &quot;21&quot;
+            }
+        ]
+    }, 
+    &quot;action&quot;: &quot;\/termUser\/get&quot;, 
+    &quot;message&quot;: &quot;ok&quot;
+}</pre></blockquote><p></p><p>2017-03-24</p><h3><a name='header-c5636' class='md-header-anchor '></a>接口说明 19、根据区域码获取注册用户所有信息</h3><ul><li>请求URL</li></ul><blockquote><p>termUser/getByRegion</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>pageSize</td><td>是</td><td>String</td><td>每页记录数</td></tr><tr><td></td><td>page</td><td>是</td><td>String</td><td>页码</td></tr><tr><td></td><td>regionGUID</td><td>是</td><td>String</td><td>区域GUID</td></tr><tr><td></td><td>type</td><td>否</td><td>String</td><td>注册用户类型</td></tr><tr><td></td><td>deleted</td><td>否</td><td>String</td><td>是否删除</td></tr><tr><td></td><td>freezed</td><td>否</td><td>String</td><td>区域状态</td></tr><tr><td></td><td>keyword</td><td>否</td><td>String</td><td>查询关键字</td></tr></tbody></table></blockquote><ul><li>请求示例：
+获取两条记录</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;pageSize&quot;: &quot;2&quot;, 
+        &quot;page&quot;: &quot;1&quot;, 
+        &quot;regionGUID&quot;: &quot;vt62ym78bg45670t&quot;
+    }
+}
+</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/termUser\/getByRegion&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;: true, 
+    &quot;code&quot;: 200, 
+    &quot;method&quot;: &quot;getByRegion&quot;, 
+    &quot;data&quot;: {
+        &quot;total&quot;: 1, 
+        &quot;totalPages&quot;: 1, 
+        &quot;termUsers&quot;: [
+            {
+                &quot;bossCity&quot;: &quot;SHSJ&quot;, 
+                &quot;birthday&quot;: &quot;2001.01.01&quot;, 
+                &quot;regions&quot;: [
+                    {
+                        &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                        &quot;level&quot;: 4, 
+                        &quot;sortNumber&quot;: 1, 
+                        &quot;extdata&quot;: &quot;&quot;, 
+                        &quot;icon&quot;: &quot;&quot;, 
+                        &quot;indexUrl&quot;: &quot;&quot;, 
+                        &quot;remark&quot;: &quot;&quot;, 
+                        &quot;type&quot;: 1, 
+                        &quot;delete&quot;: 0, 
+                        &quot;parentGuid&quot;: &quot;cd92ba17ff58968f&quot;, 
+                        &quot;guid&quot;: &quot;cd5779d4y664e776&quot;, 
+                        &quot;id&quot;: 12, 
+                        &quot;state&quot;: 0, 
+                        &quot;moveRestrict&quot;: 2, 
+                        &quot;value&quot;: &quot;建设村&quot;, 
+                        &quot;envalue&quot;: &quot;&quot;
+                    }, 
+                    {
+                        &quot;clientGuid&quot;: &quot;ubasbossservices_i88n9e3t6213b37f&quot;, 
+                        &quot;level&quot;: 4, 
+                        &quot;sortNumber&quot;: 0, 
+                        &quot;extdata&quot;: &quot;&quot;, 
+                        &quot;icon&quot;: &quot;&quot;, 
+                        &quot;indexUrl&quot;: &quot;&quot;, 
+                        &quot;remark&quot;: &quot;&quot;, 
+                        &quot;type&quot;: 1, 
+                        &quot;delete&quot;: 0, 
+                        &quot;parentGuid&quot;: &quot;cd92ba17ff58968f&quot;, 
+                        &quot;guid&quot;: &quot;cf24ec68nl90343g&quot;, 
+                        &quot;id&quot;: 11, 
+                        &quot;state&quot;: 0, 
+                        &quot;moveRestrict&quot;: 2, 
+                        &quot;value&quot;: &quot;红星村&quot;, 
+                        &quot;envalue&quot;: &quot;&quot;
+                    }
+                ], 
+                &quot;bossID&quot;: &quot;200000001&quot;, 
+                &quot;updateUserID&quot;: &quot;1000000000001&quot;, 
+                &quot;idCard&quot;: &quot;1234567889&quot;, 
+                &quot;type&quot;: &quot;1&quot;, 
+                &quot;hasRegion&quot;: 1, 
+                &quot;hasGroup&quot;: -1, 
+                &quot;id&quot;: 1, 
+                &quot;addr&quot;: &quot;上海市徐汇区漕河泾开发区&quot;, 
+                &quot;email&quot;: &quot;sina@169.com&quot;, 
+                &quot;group&quot;: null, 
+                &quot;ext&quot;: &quot;新用户&quot;, 
+                &quot;bossArea&quot;: &quot;0001&quot;, 
+                &quot;createUserID&quot;: &quot;&quot;, 
+                &quot;level&quot;: &quot;0&quot;, 
+                &quot;sex&quot;: &quot;男&quot;, 
+                &quot;GUID&quot;: &quot;1000000000001&quot;, 
+                &quot;mobile&quot;: &quot;2937429&quot;, 
+                &quot;intergration&quot;: &quot;0&quot;, 
+                &quot;updateTime&quot;: &quot;2016/12/16 15:12:03&quot;, 
+                &quot;iphone&quot;: &quot;1800012012&quot;, 
+                &quot;freezed&quot;: &quot;0&quot;, 
+                &quot;deleted&quot;: &quot;0&quot;, 
+                &quot;createTime&quot;: &quot;2016/12/16 15:12:03&quot;, 
+                &quot;name&quot;: &quot;张三1111&quot;, 
+                &quot;age&quot;: &quot;29&quot;
+            }
+        ]
+    }, 
+    &quot;action&quot;: &quot;\/termUser\/getByRegion&quot;, 
+    &quot;message&quot;: &quot;ok&quot;
+}</pre></blockquote><p></p><p>2017-03-24</p><h3><a name='header-c5763' class='md-header-anchor '></a>接口说明 20、查询某终端用户是否已订购指定的业务包</h3><ul><li>请求URL</li></ul><blockquote><p>termUser/hasSubscriberPackage</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>subsGUID</td><td>是</td><td>String</td><td>注册用户GUID</td></tr><tr><td></td><td>subscriberPackagesGUID</td><td>是</td><td>String</td><td>业务包GUID</td></tr></tbody></table></blockquote><ul><li>请求示例：
+查询GUID为c088a1cf-9b99-425f-8873-f373ab04419b的用户有没有订购GUID为6870ea7d-2cea-4c1b-842a-ad836089ee19的业务包。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;subsGUID&quot;: &quot;c088a1cf-9b99-425f-8873-f373ab04419b&quot;, 
+        &quot;subscriberPackageGUID&quot;: &quot;6870ea7d-2cea-4c1b-842a-ad836089ee19&quot;
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/termUser\/hasSubscriberPackage&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+     &quot;result&quot;:true,
+     &quot;code&quot;:200,
+     &quot;data&quot;:[],
+     &quot;method&quot;:&quot;hasSubscriberPackage&quot;,
+     &quot;action&quot;:&quot;\/termUser\/hasSubscriberPackage&quot;,
+     &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p></p><p>2017-03-24</p><h3><a name='header-c5860' class='md-header-anchor '></a>接口说明 21、注册用户设置区域</h3><ul><li>请求URL</li></ul><blockquote><p>termUser/setRegions</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>subsGUID</td><td>是</td><td>String</td><td>用户GUID</td></tr><tr><td></td><td>regionGUID</td><td>是</td><td>String</td><td>区域GUID</td></tr><tr><td></td><td>isDefault</td><td>是</td><td>String</td><td>主入口区域标识</td></tr><tr><td></td><td>isCharge</td><td>否</td><td>String</td><td>付费区域标识</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例：
+为GUID为1000000000001的用户关联GUID为3000000000001和3000000000002的两个区域，并未GUID为28441092-879b-4dbc-bba6-4f65c675d480的用户关联GUID为c74a27df77354659的区域。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: [
+        {
+            &quot;subsGUID&quot;: &quot;1000000000001&quot;, 
+            &quot;regionGUID&quot;: &quot;3000000000001&quot;, 
+            &quot;isDefault&quot;: &quot;0&quot;, 
+            &quot;isCharge&quot;: &quot;0&quot;
+        }, 
+        {
+            &quot;subsGUID&quot;: &quot;1000000000001&quot;, 
+            &quot;regionGUID&quot;: &quot;3000000000002&quot;, 
+            &quot;isDefault&quot;: &quot;0&quot;, 
+            &quot;isCharge&quot;: &quot;0&quot;
+        }, 
+        {
+            &quot;subsGUID&quot;: &quot;28441092-879b-4dbc-bba6-4f65c675d480&quot;, 
+            &quot;regionGUID&quot;: &quot; c74a27df77354659&quot;, 
+            &quot;isDefault&quot;: &quot;0&quot;, 
+            &quot;isCharge&quot;: &quot;0&quot;
+        }
+    ]
+}
+</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/termUser\/setRegions&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+      &quot;result&quot;:true,
+      &quot;code&quot;:200,
+      &quot;data&quot;:[],
+      &quot;method&quot;:&quot;setRegions&quot;,
+      &quot;action&quot;:&quot;\/termUser\/setRegions&quot;
+      &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c5973' class='md-header-anchor '></a>接口说明 22、注册用户设置分组</h3><ul><li>请求URL</li></ul><blockquote><p>termUser/setGroup</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>subsGUID</td><td>是</td><td>String</td><td>用户GUID</td></tr><tr><td></td><td>groupGUID</td><td>是</td><td>String</td><td>分组GUID</td></tr><tr><td></td><td>isDefault</td><td>是</td><td>String</td><td>主入口分组标识</td></tr><tr><td></td><td>isCharge</td><td>否</td><td>String</td><td>付费分组标识</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例：
+为GUID为1000000000001的用户关联abe849eb62a8cdc7的分组，并未GUID为28441092-879b-4dbc-bba6-4f65c675d480的用户关联GUID为e9ea9de185c89c62的分组。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: [
+        {
+            &quot;subsGUID&quot;: &quot;1000000000001&quot;, 
+            &quot;groupGUID&quot;: &quot;abe849eb62a8cdc7&quot;, 
+            &quot;isDefault&quot;: &quot;0&quot;, 
+            &quot;isCharge&quot;: &quot;0&quot;
+        }, 
+        {
+            &quot;subsGUID&quot;: &quot;1000000000001&quot;, 
+            &quot;groupGUID&quot;: &quot;e9ea9de185c89c62&quot;, 
+            &quot;isDefault&quot;: &quot;0&quot;, 
+            &quot;isCharge&quot;: &quot;0&quot;
+        }
+    ]
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/termUser\/setGroup&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+     &quot;result&quot;:true,
+     &quot;code&quot;:200,
+     &quot;data&quot;:[],
+     &quot;method&quot;:&quot;setGroup&quot;,
+     &quot;action&quot;:&quot;\/termUser\/setGroup&quot;
+     &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c6087' class='md-header-anchor '></a>接口说明 23、注册用户设置业务包</h3><ul><li>请求URL</li></ul><blockquote><p>termUser/setSubscriberPackages</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>subsGUID</td><td>是</td><td>String</td><td>用户GUID</td></tr><tr><td></td><td>FEfectivetime</td><td>否</td><td>String</td><td>业务包的有效期</td></tr><tr><td></td><td>subscriberPackagesGUID</td><td>是</td><td>String</td><td>业务包GUID</td></tr><tr><td></td><td>availabilityTime</td><td>否</td><td>String</td><td>生效时间</td></tr><tr><td></td><td>cycle</td><td>是</td><td>String</td><td>业务时长</td></tr><tr><td></td><td>action</td><td>是</td><td>String</td><td>action可能的值是：bind（开通 传的是availabilityTime生效时间 ）、unbind（停断）、suspend（暂停）、continue（继续）、freeze（暂停）、unfreeze（开始）、renew（续订 传的FEfectivetime 有效期）。</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例：
+为GUID为c088a1cf-9b99-425f-8873-f373ab04419b的用户开通GUID为6870ea7d-2cea-4c1b-842a-ad836089ee19和6870ea7d-2cea-4c1b-842a-ad836089ee19的业务包，生效时间都为2017/03/01 14:13:14，业务包时长都是30天。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: [
+        {
+            &quot;subsGUID&quot;: &quot;c088a1cf-9b99-425f-8873-f373ab04419b&quot;, 
+            &quot;subscriberPackageGUID&quot;: &quot;6870ea7d-2cea-4c1b-842a-ad836089ee19&quot;, 
+            &quot;availabilityTime&quot;: &quot;2017/03/09 14:13:14&quot;, 
+            &quot;cycle&quot;: &quot;30&quot;
+        }, 
+        {
+            &quot;subsGUID&quot;: &quot;c088a1cf-9b99-425f-8873-f373ab04419b&quot;, 
+            &quot;subscriberPackageGUID&quot;: &quot;46e14877-3c17-4b7a-8426-45e9292bb25a&quot;, 
+            &quot;availabilityTime&quot;: &quot;2017/03/09 15:13:14&quot;, 
+            &quot;cycle&quot;: &quot;30&quot;
+        }
+    ], 
+    &quot;action&quot;: &quot;bind&quot;
+}
+</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/termUser\/setSubscriberPackages&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+      &quot;result&quot;:true,
+      &quot;code&quot;:200,
+      &quot;data&quot;:[],
+      &quot;method&quot;:&quot;setSubscriberPackages&quot;,
+      &quot;action&quot;:&quot;\/termUser\/setSubscriberPackages&quot;
+      &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p></p><p>2017-03-24</p><h3><a name='header-c6215' class='md-header-anchor '></a>接口说明 24、新建一个业务包</h3><ul><li>请求URL</li></ul><blockquote><p>subscriberPackage/add</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>cycle</td><td>是</td><td>String</td><td>业务包时长，单位是天。&quot;0&quot;表示按次</td></tr><tr><td></td><td>code</td><td>否</td><td>String</td><td>业务包代码</td></tr><tr><td></td><td>name</td><td>是</td><td>String</td><td>业务包名称</td></tr><tr><td></td><td>price</td><td>是</td><td>String</td><td>业务包价格</td></tr><tr><td></td><td>creatUserID</td><td>是</td><td>String</td><td>本记录创建者的GUID</td></tr><tr><td></td><td>ext</td><td>否</td><td>String</td><td>扩展信息</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;type&quot;: &quot;1&quot;, 
+        &quot;name&quot;: &quot;松江包月&quot;, 
+        &quot;code&quot;: &quot;asdf&quot;, 
+        &quot;price&quot;: &quot;20&quot;, 
+        &quot;ext&quot;: &quot;备用字段&quot;
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/subscriberPackage\/add&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+     &quot;result&quot;:true,
+     &quot;code&quot;:200,
+     &quot;data&quot;:[],
+     &quot;method&quot;:&quot;add&quot;,
+     &quot;action&quot;:&quot;\/subscriberPackage\/add&quot;
+     &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c6340' class='md-header-anchor '></a>接口说明 25、批量删除业务包</h3><ul><li>请求URL</li></ul><blockquote><p>subscriberPackage/delete</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>GUIDs</td><td>是</td><td>Array</td><td>一个或多个业务包GUID</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例:
+删除GUID为6870ea7d-2cea-4c1b-842a-ad836089ee19和6870ea7d-2cea-4c1b-842a-ad836089ee19的业务包。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;GUIDs&quot;: [
+            &quot;6870ea7d-2cea-4c1b-842a-ad836089ee19&quot;, 
+            &quot;46e14877-3c17-4b7a-8426-45e9292bb25a&quot;
+        ]
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/subscriberPackage\/delete&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+     &quot;result&quot;:true,
+     &quot;code&quot;:200,
+     &quot;data&quot;:[],
+     &quot;method&quot;:&quot;delete&quot;,
+     &quot;action&quot;:&quot;\/subscriberPackage\/delete&quot;
+     &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c6436' class='md-header-anchor '></a>接口说明 26、批量恢复删除业务包</h3><ul><li>请求URL</li></ul><blockquote><p>subscriberPackage/undelete</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>GUIDs</td><td>是</td><td>Array</td><td>一个或多个业务包GUID</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例:
+恢复删除GUID为6870ea7d-2cea-4c1b-842a-ad836089ee19和6870ea7d-2cea-4c1b-842a-ad836089ee19的业务包。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;GUIDs&quot;: [
+            &quot;6870ea7d-2cea-4c1b-842a-ad836089ee19&quot;, 
+            &quot;46e14877-3c17-4b7a-8426-45e9292bb25a&quot;
+        ]
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/subscriberPackage\/undelete&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+      &quot;result&quot;:true,
+      &quot;code&quot;:200,
+      &quot;data&quot;:[],
+      &quot;method&quot;:&quot;undelete&quot;,
+      &quot;action&quot;:&quot;\/subscriberPackage\/undelete&quot;
+      &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c6532' class='md-header-anchor '></a>接口说明 27、批量更新业务包</h3><ul><li>请求URL</li></ul><blockquote><p>subscriberPackage/set</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>cycle</td><td>是</td><td>String</td><td>业务包时长，单位是天。&quot;0&quot;表示按次</td></tr><tr><td></td><td>code</td><td>否</td><td>String</td><td>业务包代码</td></tr><tr><td></td><td>name</td><td>是</td><td>String</td><td>业务包名称</td></tr><tr><td></td><td>price</td><td>是</td><td>String</td><td>业务包价格</td></tr><tr><td></td><td>updateUserID</td><td>是</td><td>String</td><td>本记录更新者的GUID</td></tr><tr><td></td><td>deleted</td><td>否</td><td>String</td><td>是否已删除</td></tr><tr><td></td><td>freezed</td><td>否</td><td>String</td><td>是否已冻结</td></tr><tr><td></td><td>ext</td><td>否</td><td>String</td><td>扩展信息</td></tr><tr><td>jsonpFunc</td><td></td><td>否</td><td>String</td><td>jsonp标识符</td></tr></tbody></table></blockquote><ul><li>请求示例:
+更新GUID为6870ea7d-2cea-4c1b-842a-ad836089ee19、46e14877-3c17-4b7a-8426-45e9292bb25a这两个业务包。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: [
+        {
+            &quot;GUID&quot;: &quot;6870ea7d-2cea-4c1b-842a-ad836089ee19&quot;, 
+            &quot;price&quot;: &quot;30&quot;
+        }, 
+        {
+            &quot;GUID&quot;: &quot;46e14877-3c17-4b7a-8426-45e9292bb25a&quot;, 
+            &quot;freezed&quot;: &quot;1&quot;
+        }
+    ]
+}
+</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/subscriberPackage\/set&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+       &quot;result&quot;:true,
+       &quot;code&quot;:200,
+       &quot;data&quot;:[],
+       &quot;method&quot;:&quot;set&quot;,
+       &quot;action&quot;:&quot;\/subscriberPackage\/set&quot;
+       &quot;message&quot;:&quot;OK&quot;
+}</pre></blockquote><p>2017-03-24</p><h3><a name='header-c6670' class='md-header-anchor '></a>接口说明 28、查询指定用户的业务包</h3><ul><li>请求URL</li></ul><blockquote><p>subscriberPackage/getByTermUser</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>subsGUID</td><td>是</td><td>String</td><td>注册用户GUID</td></tr></tbody></table></blockquote><ul><li>请求示例：
+查询GUID为c088a1cf-9b99-425f-8873-f373ab04419b的注册用户的所有业务包。</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;subsGUID&quot;: &quot;c088a1cf-9b99-425f-8873-f373ab04419b&quot;
+    }
+}</pre></blockquote><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/subscriberPackage\/getByTermUser&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;: true, 
+    &quot;code&quot;: 200, 
+    &quot;method&quot;: &quot;getByTermUser&quot;, 
+    &quot;data&quot;: {
+        &quot;subscriberPackages&quot;: [
+            {
+                &quot;ext&quot;: &quot;备用字段&quot;, 
+                &quot;createUserID&quot;: &quot;0&quot;, 
+                &quot;code&quot;: &quot;asdf&quot;, 
+                &quot;updateUserID&quot;: &quot;0&quot;, 
+                &quot;GUID&quot;: &quot;6870ea7d-2cea-4c1b-842a-ad836089ee19&quot;, 
+                &quot;updateTime&quot;: &quot;2017/03/07 16:19:02&quot;, 
+                &quot;type&quot;: &quot;1&quot;, 
+                &quot;freezed&quot;: &quot;0&quot;, 
+                &quot;deleted&quot;: &quot;0&quot;, 
+                &quot;createTime&quot;: &quot;2017/03/07 14:13:14&quot;, 
+                &quot;price&quot;: &quot;20&quot;, 
+                &quot;name&quot;: &quot;松江包月&quot;, 
+                &quot;id&quot;: 3
+            }, 
+            {
+                &quot;ext&quot;: &quot;备用字段&quot;, 
+                &quot;createUserID&quot;: &quot;0&quot;, 
+                &quot;code&quot;: &quot;asdf&quot;, 
+                &quot;updateUserID&quot;: &quot;0&quot;, 
+                &quot;GUID&quot;: &quot;46e14877-3c17-4b7a-8426-45e9292bb25a&quot;, 
+                &quot;updateTime&quot;: &quot;2017/03/07 16:19:02&quot;, 
+                &quot;type&quot;: &quot;1&quot;, 
+                &quot;freezed&quot;: &quot;0&quot;, 
+                &quot;deleted&quot;: &quot;0&quot;, 
+                &quot;createTime&quot;: &quot;2017/03/07 14:30:19&quot;, 
+                &quot;price&quot;: &quot;20&quot;, 
+                &quot;name&quot;: &quot;闵行包月&quot;, 
+                &quot;id&quot;: 4
+            }
+        ]
+    }, 
+    &quot;action&quot;: &quot;/subscriberPackage/getByTermUser&quot;, 
+    &quot;message&quot;: &quot;ok&quot;
+}</pre></blockquote><p></p><p>2017-03-24</p><h3><a name='header-c6762' class='md-header-anchor '></a>接口说明 29、分页查询业务包</h3><ul><li>请求URL</li></ul><blockquote><p>subscriberPackage/get</p></blockquote><ul><li>请求方式</li></ul><blockquote><p>POST</p></blockquote><ul><li>请求参数</li></ul><blockquote><table><thead><tr><th>一级参数</th><th>二级参数</th><th>必要</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>__param</td><td></td><td>是</td><td>String</td><td>总参数（json字符串）</td></tr><tr><td></td><td>pageSize</td><td>是</td><td>String</td><td>每页显示记录数</td></tr><tr><td></td><td>page</td><td>是</td><td>String</td><td>所要查询的页码</td></tr><tr><td></td><td>type</td><td>否</td><td>String</td><td>业务包类型</td></tr><tr><td></td><td>freezed</td><td>否</td><td>String</td><td>是否已冻结</td></tr><tr><td></td><td>deleted</td><td>否</td><td>String</td><td>是否已删除</td></tr><tr><td></td><td>keyword</td><td>否</td><td>String</td><td>查询关键字</td></tr><tr><td></td><td>cycle</td><td>否</td><td>String</td><td>查询关键字</td></tr></tbody></table></blockquote><ul><li>请求示例：
+查询GUID为c088a1cf-9b99-425f-8873-f373ab04419b的用户有没有订购GUID为6870ea7d-2cea-4c1b-842a-ad836089ee19的业务包。（如果不传pageSize和page默认为查询所有业务包记录）</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;param&quot;: {
+        &quot;pageSize&quot;: &quot;2&quot;, 
+        &quot;page&quot;: &quot;1&quot;
+    }
+}</pre></blockquote><p></p><ul><li>返回参数</li></ul><blockquote><table><thead><tr><th>返回参数</th><th>参数类型</th><th>参数说明</th></tr></thead><tbody><tr><td>result</td><td>String</td><td>调用结果（true=成功，false=失败）</td></tr><tr><td>code</td><td>String</td><td>状态码，200=成功，500=不成功，......</td></tr><tr><td>data</td><td>String</td><td>返回给前台的数据，一个json数组字符串。</td></tr><tr><td>method</td><td>String</td><td>后台控制器处理该操作的方法名</td></tr><tr><td>action</td><td>String</td><td>处理该该操作的接口路径，例如  &quot;\/subscriberPackage\/get&quot;</td></tr><tr><td>message</td><td>String</td><td>返回信息</td></tr></tbody></table></blockquote><ul><li>返回示例</li></ul><blockquote><pre class='md-fences mock-cm' style='display:block;position:relative'>{
+    &quot;result&quot;: true, 
+    &quot;code&quot;: 200, 
+    &quot;method&quot;: &quot;get&quot;, 
+    &quot;data&quot;: {
+        &quot;total&quot;: 4, 
+        &quot;totalPages&quot;: 2, 
+        &quot;subscriberPackages&quot;: [
+            {
+                &quot;ext&quot;: &quot;备用字段&quot;, 
+                &quot;createUserID&quot;: &quot;0&quot;, 
+                &quot;code&quot;: &quot;asdf&quot;, 
+                &quot;updateUserID&quot;: &quot;0&quot;, 
+                &quot;GUID&quot;: &quot;6870ea7d-2cea-4c1b-842a-ad836089ee19&quot;, 
+                &quot;updateTime&quot;: &quot;2017/03/07 16:19:02&quot;, 
+                &quot;type&quot;: &quot;1&quot;, 
+                &quot;freezed&quot;: &quot;0&quot;, 
+                &quot;deleted&quot;: &quot;0&quot;, 
+                &quot;createTime&quot;: &quot;2017/03/07 14:13:14&quot;, 
+                &quot;FEfectivetime&quot;:2017/05/06 00:00:00
+                &quot;price&quot;: &quot;20&quot;, 
+                &quot;name&quot;: &quot;松江包月&quot;, 
+                &quot;id&quot;: 3
+            }, 
+            {
+                &quot;ext&quot;: &quot;备用字段&quot;, 
+                &quot;createUserID&quot;: &quot;0&quot;, 
+                &quot;code&quot;: &quot;asdf&quot;, 
+                &quot;updateUserID&quot;: &quot;0&quot;, 
+                &quot;GUID&quot;: &quot;46e14877-3c17-4b7a-8426-45e9292bb25a&quot;, 
+                &quot;updateTime&quot;: &quot;2017/03/07 16:19:02&quot;, 
+                &quot;type&quot;: &quot;1&quot;, 
+                &quot;freezed&quot;: &quot;0&quot;, 
+                &quot;deleted&quot;: &quot;0&quot;, 
+                &quot;createTime&quot;: &quot;2017/03/07 14:30:19&quot;, 
+                &quot;FEfectivetime&quot;:&quot;2017/05/06 00:00:00&quot;,
+                &quot;price&quot;: &quot;20&quot;, 
+                &quot;name&quot;: &quot;闵行包月&quot;, 
+                &quot;id&quot;: 4
+            }
+        ]
+    }, 
+    &quot;action&quot;: &quot;/subscriberPackage/get&quot;, 
+    &quot;message&quot;: &quot;ok&quot;
+}</pre></blockquote><p></p></div>
+</body>
+</html>

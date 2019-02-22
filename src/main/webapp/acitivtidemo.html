@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<link rel="stylesheet" href=css/acitivtidemo.css>
+<link rel="stylesheet" href=css/layui.css>
+<meta charset="UTF-8">
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<video class="video-player" preload="auto" autoplay="autoplay"
+		loop="loop" data-height="1080" data-width="1920" height="1080"
+		width="1920" style="position: absolute; z-index: 1">
+		<source src="video/login.mp4" type="video/mp4">
+	</video>
+
+	<div class="ac-div">
+
+		<div class="animate box ">
+			<span style="color: #737373; text-shadow: 0px 1px 0px #e5e5ee">Activiti</span>
+		</div>
+		<img src="image/activiti.jpg" class="img-circle">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="firstname"
+						placeholder="请输入帐号" value="admin">
+				</div>
+			</div>
+
+			<div class="form-group">
+
+				<div class="col-sm-10">
+
+					<input type="text" class="form-control" id="password"
+						placeholder="请输入密码" value="admin">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button class="btn btn-default" id="submit" type="button">GO!</button>
+					<span style="color: white" id="logspan"></span>
+				</div>
+			</div>
+		</form>
+
+	</div>
+	<div class="ac-Mask">
+
+		<span class="ac-span"> 正在尝试进入系统,请稍后.... <i
+			class="layui-icon layui-anim layui-anim-rotate layui-anim-loop"
+			style="color: white">&#xe63d;</i>
+		</span>
+		<iframe src="acitiviubas.html" frameborder="1" height="100%"
+			width="100%" marginheight="0" marginwidth="0" scrolling="no" id="myFrame"></iframe>
+	</div>
+	<!-- /input-group -->
+	<script src="js/jquery-1.9.1.js"></script>
+	<script
+		src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+
+	<script src="js/layui.js"></script>
+	<script src="js/acitivtidemo.js"></script>
+
+</body>
+</html>
